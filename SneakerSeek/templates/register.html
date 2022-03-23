@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Signika:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
+  <body
+    style="
+      background-image: linear-gradient(
+          rgba(255, 255, 255, 0.192),
+          rgba(32, 32, 32, 0.822)
+        ),
+        url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v1016-a-02d-ksh6raod.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=d757a7735c64f48e47971cfaae806cb1);
+      background-size: cover;
+    "
+  >
+    <div class="container">
+      <div
+        class="d-flex align-items-center justify-content-center"
+        style="width: 100%; height: 100vh"
+      >
+        <form
+          action="register"
+          method="POST"
+          style="
+            padding: 5%;
+            border-style: solid;
+            border-radius: 25px;
+            font-family: 'Signika', sans-serif;
+            background-image: linear-gradient(
+                rgba(133, 133, 133, 0.5),
+                rgba(48, 48, 48, 0.486)
+              ),
+              url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
+            background-size: cover;
+            color: white;
+            border: none;
+            box-shadow: 3px 3px 5px rgb(206, 206, 206);
+          "
+        >
+          {% csrf_token %}
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="f_name">Enter Your First Name:</label>
+                <br />
+                <input
+                  type="text"
+                  name="f_name"
+                  placeholder="Enter First Name"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="l_name">Enter Your Last Name:</label>
+                <br />
+                <input
+                  type="text"
+                  name="l_name"
+                  placeholder="Enter Last Name"
+                  class="form-control"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="username">Enter a Username:</label>
+            <br />
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter Username"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Enter an Email Address:</label>
+            <br />
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter Email"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Enter a Password:</label>
+            <br />
+            <input
+              type="password"
+              name="pass"
+              placeholder="Enter Password"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group">
+            <label for="username">Re-Enter your chosen password:</label>
+            <br />
+            <input
+              type="password"
+              name="confirmpass"
+              placeholder="Enter Password Again"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group text-center">
+            <input
+              type="submit"
+              value="Create Account"
+              class="btn btn-primary"
+              style="border: none; background-color: rgba(110, 110, 110, 0.829)"
+            />
+          </div>
+          {% for message in messages %}
+          <h3 class="text-center" style="color: red">{{message}}</h3>
+          {% endfor %}
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
