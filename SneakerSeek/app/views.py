@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import logout
 from django.contrib import messages
+from .models import Shoe
 
 # Create your views here.
 def index(request):
@@ -14,7 +15,7 @@ def index(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect("search")
+            return redirect("search_view")
         else:
             messages.info(
                 request, "The Username and/or Password entered are incorrect!"
@@ -54,10 +55,118 @@ def register(request):
                     last_name=lname,
                 )
                 user.save()
-                return redirect("login")
+                return redirect("index")
         else:
             messages.info(request, "Passwords did not match!")
             return redirect("register")
 
     else:
         return render(request, "register.html")
+
+
+# @login_required
+def search_view(request):
+    if request.method != "POST":
+        # endpoint to grab all cities
+        cities = ["Calgary", "Edmonton", "Airdrie", "Red Deer", "Fort Mac"]
+        context = {"cities": cities}
+        return render(request, "search.html", context)
+    else:
+        brand = request.POST["brand"]
+        size = request.POST["size"]
+        type = request.POST["type"]
+        max_price = request.POST["max_price"]
+        gender = request.POST["gender"]
+        condition = request.POST["condition"]
+        quadrant = request.POST["quadrant"]
+        city = request.POST["city"]
+
+        return redirect(
+            f"results/brand={brand},size={size},type={type},max_price={max_price},gender={gender},condition={condition},quadrant={quadrant},city={city}"
+        )
+
+
+# @login_required
+def results(request, pk):
+    if request.method != "POST":
+        list_params = pk.split(",")
+        search = {}
+        for pair in list_params:
+            search[pair[0 : pair.find("=")]] = pair[pair.find("=") + 1 :]
+
+        shoes = sample_data()
+        return render(request, "results.html", {"shoes": shoes})
+
+    else:
+        id = request.POST["id"]
+        return redirect(f"../product/{id}")
+
+
+def product(request, pk):
+    return render(request, "product.html")
+
+
+def sample_data():
+    shoe1 = Shoe(
+        brand="Nike",
+        size=10,
+        shoe_type="Highs",
+        price=189.99,
+        gender="Male",
+        year_manufactured=2001,
+        condition="Deadstock",
+        quadrant="SW",
+        seller="Div",
+        image_url="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/6f950390-c74c-41dd-90c6-9fae9c6adbdf/air-force-1-high-07-lx-mens-shoes-wTttNP.png",
+        title="Nike Highs Brand New",
+        product_id="12341234",
+        city="Calgary",
+    )
+    shoe2 = Shoe(
+        brand="Adidas",
+        size=7,
+        shoe_type="Mids",
+        price=99.99,
+        gender="Female",
+        year_manufactured=2021,
+        condition="Beaters",
+        quadrant="NE",
+        seller="Curtis",
+        image_url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQrjAdYWImx34u-AHy1X6hVuseZ_sLBzj3dw&usqp=CAU",
+        title="Adidas Mids Used",
+        product_id="23452345",
+        city="Edmonton",
+    )
+    shoe3 = Shoe(
+        brand="Air Jordan",
+        size=13,
+        shoe_type="Highs",
+        price=1100.00,
+        gender="Male",
+        year_manufactured=1998,
+        condition="Deadstock",
+        quadrant="SE",
+        seller="Liam",
+        image_url="https://process.fs.grailed.com/AJdAgnqCST4iPtnUxiGtTz/cache=expiry:max/rotate=deg:exif/resize=width:2400,fit:crop/output=quality:70/compress/https://process.fs.grailed.com/z0qM3P5pR3a9viT9MCon",
+        title="Jordan 1s Brand New",
+        product_id="34563456",
+        city="Chicago",
+    )
+
+    return [
+        shoe1,
+        shoe2,
+        shoe3,
+        shoe1,
+        shoe2,
+        shoe3,
+        shoe1,
+        shoe2,
+        shoe3,
+        shoe1,
+        shoe2,
+        shoe3,
+        shoe1,
+        shoe2,
+        shoe3,
+    ]
