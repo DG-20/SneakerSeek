@@ -43,14 +43,44 @@
       background-size: cover;
     "
   >
-    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
-      <div class="container-fluid-nav text-center">
-        <a
-          class="navbar-brand"
-          href="/"
-          style="font-family: hurricane; font-size: 25px; font-weight: bold"
-          >SneakerSeek</a
-        >
+    <nav
+      class="navbar navbar-expand-lg navbar-light sticky-top bg-light"
+      style="border-radius: 25px"
+    >
+      <a
+        class="navbar-brand"
+        href="../search_view"
+        style="font-family: hurricane; font-size: 25px; font-weight: bold"
+        >SneakerSeek</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+        aria-controls="navbar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="../search_view"
+              >Search <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../sell">Sell a Shoe</a>
+          </li>
+        </ul>
+        <span class="nav-item">
+          <a href="../logout_view" class="text-muted">Logout</a>
+        </span>
       </div>
     </nav>
     <div class="container">
@@ -163,7 +193,7 @@
                   <option value="Rarely_Used">Rarely Used</option>
                   <option value="Gently_Used">Gently Used</option>
                   <option value="Worn">Worn</option>
-                  <option value="Beaters">Beaters</option>
+                  <option value="Beaters">Heavily Worn</option>
                 </select>
               </div>
             </div>
@@ -218,9 +248,6 @@
               style="border: none; background-color: rgba(110, 110, 110, 0.829)"
             />
           </div>
-          {% for message in messages %}
-          <h3 class="text-center" style="color: red">{{message}}</h3>
-          {% endfor %}
         </form>
       </div>
     </div>
