@@ -64,7 +64,7 @@ def register(request):
         return render(request, "register.html")
 
 
-# @login_required
+@login_required
 def search_view(request):
     if request.method != "POST":
         # endpoint to grab all cities
@@ -86,7 +86,7 @@ def search_view(request):
         )
 
 
-# @login_required
+@login_required
 def results(request, pk):
     if request.method != "POST":
         list_params = pk.split(",")
@@ -102,8 +102,20 @@ def results(request, pk):
         return redirect(f"../product/{id}")
 
 
+@login_required
 def product(request, pk):
-    return render(request, "product.html")
+    if request.method != "POST":
+
+        return render(request, "product.html", {"product": sample_data()[0]})
+
+    else:
+        a = 2
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect("index")
 
 
 def sample_data():
@@ -129,7 +141,7 @@ def sample_data():
         price=99.99,
         gender="Female",
         year_manufactured=2021,
-        condition="Beaters",
+        condition="Heavily Worn",
         quadrant="NE",
         seller="Curtis",
         image_url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQrjAdYWImx34u-AHy1X6hVuseZ_sLBzj3dw&usqp=CAU",
@@ -153,20 +165,4 @@ def sample_data():
         city="Chicago",
     )
 
-    return [
-        shoe1,
-        shoe2,
-        shoe3,
-        shoe1,
-        shoe2,
-        shoe3,
-        shoe1,
-        shoe2,
-        shoe3,
-        shoe1,
-        shoe2,
-        shoe3,
-        shoe1,
-        shoe2,
-        shoe3,
-    ]
+    return [shoe1, shoe2, shoe3]

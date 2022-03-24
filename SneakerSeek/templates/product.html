@@ -4,9 +4,249 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hurricane&display=swap"
+      rel="stylesheet"
+    />
+    <title>Search Results</title>
   </head>
-  <body>
-    WOW
+  <body
+    style="
+      background-image: linear-gradient(
+        rgba(255, 255, 255, 0.192),
+        rgba(32, 32, 32, 0.822)
+      );
+      background-size: cover;
+      min-height: 100vh;
+    "
+  >
+    <nav
+      class="navbar navbar-expand-lg navbar-light sticky-top bg-light"
+      style="border-radius: 25px"
+    >
+      <a
+        class="navbar-brand"
+        href="../search_view"
+        style="font-family: hurricane; font-size: 25px; font-weight: bold"
+        >SneakerSeek</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+        aria-controls="navbar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../search_view"
+              >Search <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../sell">Sell a Shoe</a>
+          </li>
+        </ul>
+        <span class="nav-item">
+          <a href="../logout_view" class="text-muted">Logout</a>
+        </span>
+      </div>
+    </nav>
+    <div
+      class="container"
+      style="
+        padding: 3%;
+        border-style: solid;
+        border-radius: 25px;
+        font-family: 'Signika', sans-serif;
+        background-image: linear-gradient(
+            rgba(133, 133, 133, 0.5),
+            rgba(48, 48, 48, 0.486)
+          ),
+          url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
+        background-size: cover;
+        color: white;
+        border: none;
+        box-shadow: 3px 3px 5px rgb(206, 206, 206);
+      "
+    >
+      <div class="row">
+        <div class="col-lg-5 col-md-5 col-sm-12 text-center">
+          <img
+            src="{{product.image_url}}"
+            class="image-responsive"
+            width="400"
+            style="border-radius: 25px"
+          />
+        </div>
+        <div class="col-lg-7 col-md-7 col-sm-12">
+          <div class="row">
+            <div class="col-12">
+              <div class="display-4 text-center" style="font-size: xx-large">
+                {{product.title}}
+              </div>
+              <div class="display-4 text-center" style="font-size: large">
+                Seller: {{product.seller}}
+              </div>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-6">
+              <p class="text-muted">
+                <strong>Brand: </strong>{{product.brand}}
+              </p>
+            </div>
+            <div class="col-6">
+              <p class="text-muted">
+                <strong>Shoe Type: </strong>{{product.shoe_type}}
+              </p>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-6">
+              <p class="text-muted">
+                <strong>Gender: </strong>{{product.gender}}
+              </p>
+            </div>
+            <div class="col-6">
+              <p class="text-muted"><strong>Size: </strong>{{product.size}}</p>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-6">
+              <p class="text-muted">
+                <strong>Condition: </strong>{{product.condition}}
+              </p>
+            </div>
+            <div class="col-6">
+              <p class="text-muted">
+                <strong>Year Made: </strong>{{product.year_manufactured}}
+              </p>
+            </div>
+          </div>
+          <div class="row text-center">
+            <div class="col-6">
+              <p class="text-muted">
+                <strong>Location: </strong>{{product.quadrant}},
+                {{product.city}}
+              </p>
+            </div>
+            <div class="col-6">
+              <p class="text-muted">
+                <strong>Asking Price: </strong>${{product.price}}
+              </p>
+            </div>
+          </div>
+          <br />
+          <br />
+          <div class="row text-center">
+            <div class="col-12">
+              <button
+                class="btn btn-primary"
+                style="
+                  border: none;
+                  background-color: rgba(110, 110, 110, 0.829);
+                "
+                data-toggle="collapse"
+                data-target="#contact-form"
+                aria-expanded="false"
+                aria-controls="contact-form"
+              >
+                I'm Interested!
+              </button>
+              <form
+                id="contact-form"
+                class="collapse multi-collapse"
+                name="contact-form"
+                method="POST"
+              >
+                {% csrf_token %}
+                <br />
+                <div class="form-group">
+                  <label for="name" class="">Your Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="form-control text-center"
+                    placeholder="Enter Your Name"
+                    style="border-radius: 25px"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email" class="">Your Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-control text-center"
+                    placeholder="Enter Your Email"
+                    style="border-radius: 25px"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="message" class="">Your Message</label>
+                  <textarea
+                    type="text"
+                    id="message"
+                    name="message"
+                    class="form-control text-center"
+                    placeholder="Type in Your Message"
+                    style="border-radius: 25px"
+                    required
+                  ></textarea>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="submit"
+                    value="Send to Seller!"
+                    class="form-control"
+                    style="
+                      border: none;
+                      background-color: rgba(110, 110, 110, 0.829);
+                      border-radius: 25px;
+                      color: white;
+                    "
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
