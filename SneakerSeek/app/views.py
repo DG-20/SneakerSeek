@@ -135,12 +135,45 @@ def settings(request):
     else:
         firstName = request.POST["f_name"]
         lastName = request.POST["l_name"]
-        type = request.POST["type"]
-        max_price = request.POST["max_price"]
-        gender = request.POST["gender"]
-        condition = request.POST["condition"]
-        quadrant = request.POST["quadrant"]
-        city = request.POST["city"]
+        #username = request.POST["username"]
+        #email = request.POST["email"]
+        currentPassword = request.POST["currentPassword"]
+        newPassword = request.POST["newPassword"]
+        confirmPassword = request.POST["confirmPassword"]
+
+        if firstName.strip() and firstName:
+            request.user.first_name = firstName
+            request.user.save()
+        
+        if lastName.strip() and lastName:
+            request.user.last_name = lastName
+            request.user.save()
+        
+        if currentPassword.strip() and currentPassword:
+            if newPassword.strip() and newPassword:
+                if confirmPassword.strip() and confirmPassword:
+                    if currentPassword == request.user.password:
+                        matched_users = auth.authentication(username = request.user.username, password = currentPassword)
+                        if matched_users is None:
+                            messages.info(
+                                request, "The current password entered was incorrect!"
+                            )
+                            return redirect("settings")
+                        else:
+                            if newPassword == confirmPassword:
+                                request.user.set_password(newPassword)
+                                request.user.save()
+                                return redirect("profile")
+
+                            else:
+                                messages.info(
+                                request, "The new password was not confirmed correctly!"
+                            )
+                            return redirect("settings")
+        return redirect("profile")
+
+                
+
         #if firstname is empty dont update if it isnt empty then update it
         #if old password is not empty then compare to current password if they match then
         #if newpassword equals renewpassword then update password
