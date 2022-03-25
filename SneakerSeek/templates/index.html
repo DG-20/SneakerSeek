@@ -32,6 +32,12 @@
       href="https://fonts.googleapis.com/css2?family=Hurricane&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body
     style="
@@ -56,7 +62,7 @@
             padding: 5%;
             border-style: solid;
             border-radius: 25px;
-            font-family: 'Signika', sans-serif;
+            font-family: 'Sora', sans-serif;
             background-image: linear-gradient(
                 rgba(133, 133, 133, 0.5),
                 rgba(48, 48, 48, 0.486)
@@ -69,7 +75,7 @@
           "
         >
           {% csrf_token %}
-          <div class="display-4">
+          <div class="display-4" style="font-family: 'Sora', sans-serif">
             Welcome to
             <span style="font-family: 'hurricane'; font-size: xxxx-large"
               >SneakerSeek!</span
@@ -79,6 +85,7 @@
             The one stop for buying and selling shoes locally!
             <a href="register">Sign up</a> to join the sneaker community now!
           </h4>
+          <br />
           <div class="form-group">
             <label for="username">Enter Username</label>
             <input
@@ -107,6 +114,9 @@
               style="border: none; background-color: rgba(110, 110, 110, 0.829)"
             />
           </div>
+          {% for message in messages %}
+          <h3 class="text-center" style="color: red">{{message}}</h3>
+          {% endfor %}
         </form>
       </div>
     </div>

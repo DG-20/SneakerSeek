@@ -18,7 +18,7 @@ def index(request):
             return redirect("search_view")
         else:
             messages.info(
-                request, "The Username and/or Password entered are incorrect!"
+                request, "The Username and/or Password Entered are Incorrect!"
             )
             return redirect("index")
     else:
@@ -127,16 +127,17 @@ def logout_view(request):
     logout(request)
     return redirect("index")
 
+
 @login_required
 def settings(request):
     if request.method != "POST":
         return render(request, "settings.html")
-    
+
     else:
         firstName = request.POST["f_name"]
         lastName = request.POST["l_name"]
-        #username = request.POST["username"]
-        #email = request.POST["email"]
+        # username = request.POST["username"]
+        # email = request.POST["email"]
         currentPassword = request.POST["currentPassword"]
         newPassword = request.POST["newPassword"]
         confirmPassword = request.POST["confirmPassword"]
@@ -144,16 +145,18 @@ def settings(request):
         if firstName.strip() and firstName:
             request.user.first_name = firstName
             request.user.save()
-        
+
         if lastName.strip() and lastName:
             request.user.last_name = lastName
             request.user.save()
-        
+
         if currentPassword.strip() and currentPassword:
             if newPassword.strip() and newPassword:
                 if confirmPassword.strip() and confirmPassword:
                     if currentPassword == request.user.password:
-                        matched_users = auth.authentication(username = request.user.username, password = currentPassword)
+                        matched_users = auth.authentication(
+                            username=request.user.username, password=currentPassword
+                        )
                         if matched_users is None:
                             messages.info(
                                 request, "The current password entered was incorrect!"
@@ -167,21 +170,22 @@ def settings(request):
 
                             else:
                                 messages.info(
-                                request, "The new password was not confirmed correctly!"
-                            )
+                                    request,
+                                    "The new password was not confirmed correctly!",
+                                )
                             return redirect("settings")
         return redirect("profile")
 
-                
+        # if firstname is empty dont update if it isnt empty then update it
+        # if old password is not empty then compare to current password if they match then
+        # if newpassword equals renewpassword then update password
+        # if old password is incorrect or two new passwords dont match then need to show a message similar to register
 
-        #if firstname is empty dont update if it isnt empty then update it
-        #if old password is not empty then compare to current password if they match then
-        #if newpassword equals renewpassword then update password
-        #if old password is incorrect or two new passwords dont match then need to show a message similar to register
 
 @login_required
 def profile(request):
     return render(request, "profile.html")
+
 
 def sample_data():
     shoe1 = Shoe(
