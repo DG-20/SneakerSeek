@@ -31,7 +31,7 @@
       href="https://fonts.googleapis.com/css2?family=Hurricane&display=swap"
       rel="stylesheet"
     />
-    <title>Search Results</title>
+    <title>Search Criteria</title>
   </head>
   <body
     style="
@@ -40,6 +40,7 @@
           rgba(32, 32, 32, 0.822)
         ),
         url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v1016-a-02d-ksh6raod.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=d757a7735c64f48e47971cfaae806cb1);
+      background-size: cover;
     "
   >
     <nav
@@ -65,7 +66,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="../search_view"
               >Search <span class="sr-only">(current)</span></a
             >
@@ -82,80 +83,5 @@
         </span>
       </div>
     </nav>
-    <div class="container" style="padding: 3%">
-      <div
-        style="
-          text-align: center;
-          text-decoration: underline;
-          font-size: xxx-large;
-          font-weight: bold;
-        "
-        class="display-4 text-muted"
-      >
-        Shoes Matching Your Search Criteria
-      </div>
-      <br />
-      <div
-        class="table-responsive-sm"
-        style="
-          padding: 3%;
-          border-style: solid;
-          border-radius: 25px;
-          font-family: 'Signika', sans-serif;
-          background-image: linear-gradient(
-              rgba(133, 133, 133, 0.5),
-              rgba(48, 48, 48, 0.486)
-            ),
-            url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
-          background-size: cover;
-          color: white;
-          border: none;
-          box-shadow: 3px 3px 5px rgb(206, 206, 206);
-        "
-      >
-        <table class="table table-hover" style="text-align: center">
-          <thead>
-            <tr style="color: white">
-              <th scope="col">Shoe Name</th>
-              <th scope="col">Image</th>
-              <th scope="col">List Price</th>
-              <th scope="col">Size</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Condition</th>
-              <th scope="col">City</th>
-              <th scope="col">Select</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for shoe in shoes %}
-            <tr>
-              <td>{{shoe.title}}</td>
-              <td><img src="{{shoe.image_url}}" width="100" style="border-radius: 15px;"/></td>
-              <td>{{shoe.price}}</td>
-              <td>{{shoe.size}}</td>
-              <td>{{shoe.gender}}</td>
-              <td>{{shoe.condition}}</td>
-              <td>{{shoe.city}}</td>
-              <td>
-                <form action="results" method="POST">
-                  {% csrf_token %}
-                  <input type="hidden" name="id" value="{{shoe.product_id}}" />
-                  <input
-                    type="submit"
-                    value="More Information"
-                    class="btn btn-primary"
-                    style="
-                      border: none;
-                      background-color: rgba(110, 110, 110, 0.829);
-                    "
-                  />
-                </form>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
-    </div>
   </body>
 </html>
