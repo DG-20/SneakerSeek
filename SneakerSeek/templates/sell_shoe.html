@@ -85,3 +85,352 @@
     </nav>
   </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="UTF-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link
+     rel="stylesheet"
+     href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+     crossorigin="anonymous"
+   />
+   <script
+     src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+     crossorigin="anonymous"
+   ></script>
+   <script
+     src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+     crossorigin="anonymous"
+   ></script>
+   <script
+     src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+     crossorigin="anonymous"
+   ></script>
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+     href="https://fonts.googleapis.com/css2?family=Hurricane&display=swap"
+     rel="stylesheet"
+   />
+   <title>Search Criteria</title>
+ </head>
+ <body
+   style="
+     background-image: linear-gradient(
+         rgba(255, 255, 255, 0.192),
+         rgba(32, 32, 32, 0.822)
+       ),
+       url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v1016-a-02d-ksh6raod.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=d757a7735c64f48e47971cfaae806cb1);
+     background-size: cover;
+   "
+ >
+   <nav
+     class="navbar navbar-expand-lg navbar-light sticky-top bg-light"
+     style="border-radius: 25px"
+   >
+     <a
+       class="navbar-brand"
+       href="../search_view"
+       style="font-family: hurricane; font-size: 25px; font-weight: bold"
+       >SneakerSeek</a
+     >
+     <button
+       class="navbar-toggler"
+       type="button"
+       data-toggle="collapse"
+       data-target="#navbar"
+       aria-controls="navbar"
+       aria-expanded="false"
+       aria-label="Toggle navigation"
+     >
+       <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbar">
+       <ul class="navbar-nav mr-auto">
+         <li class="nav-item">
+           <a class="nav-link" href="../search_view"
+             >Search <span class="sr-only">(current)</span></a
+           >
+         </li>
+         <li class="nav-item">
+           <a class="nav-link" href="../profile">Profile</a>
+         </li>
+         <li class="nav-item act">
+           <a class="nav-link" href="../sell_shoe">Sell a Shoe</a>
+         </li>
+       </ul>
+       <span class="nav-item">
+         <a href="../logout_view" class="text-muted">Logout</a>
+       </span>
+   </div>
+   </nav>
+ <div class="container">
+   <div class="main-body">
+     <br>
+     <br>
+     <form
+         action="settings_view"
+         method="POST"
+         style="
+           padding-top: 0%;
+           background-color: none;
+           margin: auto;
+         "
+     >
+     <div class="row gutters-sm">
+       <div class="col-md-4 mb-3" width="50">
+         <div class="card shadow p-3 mb-5 bg-white rounded" style="
+         padding: 5%;
+         border-style: solid;
+         border-radius: 25px;
+         font-family: 'Signika', sans-serif;
+         background-image: linear-gradient(
+             rgba(133, 133, 133, 0.5),
+             rgba(48, 48, 48, 0.486)
+           ),
+           url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
+         background-size: cover;
+         color: white;
+         border: none;
+         box-shadow: 3px 3px 5px rgb(206, 206, 206);
+       ">
+           <div class="card-body" >
+             <div class="d-flex flex-column align-items-center text-center">
+               <img src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Pic.png" style="filter: grayscale(100%);" alt="user" class="rounded-circle" width="125">
+               <div class="mt-3">
+                 <div class="btn btn-mdb-color btn-rounded float-left">
+                   <span style="color: white;">Add photo</span>
+                  
+                   <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm" style="overflow: hidden;">
+                     <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0 btn btn-light m-0 rounded-pill px-4" style="white-space: nowrap; display: none;">
+                     <div class="input-group-append">
+                       <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+  
+         <div class="col-md-8" style="max-width: 100%;">
+           <div class="card mb-3 shadow p-3 mb-5 bg-white rounded" style="
+           padding: 5%;
+           border-style: solid;
+           border-radius: 50px;
+           font-family: 'Signika', sans-serif;
+           background-image: linear-gradient(
+               rgba(133, 133, 133, 0.5),
+               rgba(48, 48, 48, 0.486)
+             ),
+             url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
+           background-size: cover;
+           color: white;
+           border: none;
+           box-shadow: 3px 3px 5px rgb(206, 206, 206);
+         ">
+             <div class="card-body" width="150">
+               <div class="row">
+                 <div class="col-sm-4">
+                   <h6 class="mb-0">Brand</h6>
+                 </div>
+                 <div class="form-group">
+                   <select name="brand" id="Brand" class="custom-select">
+                     <option value="Air_Jordan" selected>Air Jordan</option>
+                     <option value="Nike">Nike</option>
+                     <option value="Adidas">Adidas</option>
+                     <option value="Under_Armour">Under Armour</option>
+                     <option value="New_Balance">New Balance</option>
+                     <option value="Converse">Converse</option>
+                     <option value="Common_Projects">Common Projects</option>
+                     <option value="Puma">Puma</option>
+                     <option value="Vans">Vans</option>
+                     <option value="Reebok">Reebok</option>
+                     <option value="Balenciaga">Balenciaga</option>
+                     <option value="Asics">Asics</option>
+                     <option value="Gucci">Gucci</option>
+                     <option value="Sketchers">Sketchers</option>
+                     <option value="Fila">Fila</option>
+                   </select>
+                 </div>
+               </div>
+ 
+               <div class="row">
+                 <div class="col-sm-4">
+                   <h6 class="mb-0">Size</h6>
+                 </div>
+                 <div class="form-group">
+                     <select name="size" id="Size" class="custom-select">
+                       <option value="6" selected>6</option>
+                       <option value="7">7</option>
+                       <option value="8">8</option>
+                       <option value="9">9</option>
+                       <option value="10">10</option>
+                       <option value="11">11</option>
+                       <option value="12">12</option>
+                       <option value="13">13</option>
+                       <option value="14">14</option>
+                     </select>
+                 </div>
+               </div>
+ 
+               <div class="row">
+                 <div class="col-sm-4">
+                   <h6 class="mb-0">Type</h6>
+                 </div>
+                 <div class="form-group">
+                   <select name="type" id="Type" class="custom-select">
+                     <option value="Highs" selected>Highs</option>
+                     <option value="Lows">Lows</option>
+                     <option value="Mids">Mids</option>
+                     <option value="Slides">Slides</option>
+                     <option value="Heels">High Heels</option>
+                     <option value="Slippers">Slippers</option>
+                     <option value="Oxfords">Oxfords</option>
+                   </select>
+                 </div>
+               </div>
+               <hr>
+               <div class="row">
+                 <div class="col-sm-4">
+                   <h6 class="mb-0">Price</h6>
+                 </div>
+                 <div class="form-group">
+                   <div class="input-group">
+                     <div class="input-group-prepend">
+                       <span class="input-group-text">$</span>
+                     </div>
+                     <input type="number" class="form-control" id="amount" placeholder="0.00" name="price" step="0.01">
+                   </div>
+                 </div>
+               </div>
+  
+               <hr>
+  
+               <div class="row">
+                 <div class="col-sm-4">
+                   <h6 class="mb-0">Gender</h6>
+                 </div>
+                 <div class="form-group">
+                   <select name="price" id="Price" class="custom-select">
+                     <option value="Unisex" selected>Unisex</option>
+                     <option value="Male">Male</option>
+                     <option value="Female">Female</option>
+                   </select>
+                 </div>
+               </div>
+               <div class="row">
+                 <div class="col-sm-4">
+                   <h6 class="mb-0">Year Manufactured</h6>
+                 </div>
+                 <div class="form-group">
+                     <select name="type" id="Type" class="custom-select">
+                       <option value="1990" selected>1990</option>
+                       <option value="1991">1991</option>
+                       <option value="1992">1992</option>
+                       <option value="1991">1993</option>
+                       <option value="1991">1994</option>
+                       <option value="1991">1995</option>
+                       <option value="1991">1996</option>
+                       <option value="1991">1997</option>
+                       <option value="1991">1998</option>
+                       <option value="1991">1999</option>
+                       <option value="2000">2000</option>
+                       <option value="2001">2001</option>
+                       <option value="2002">2002</option>
+                       <option value="2003">2003</option>
+                       <option value="2004">2004</option>
+                       <option value="2005">2005</option>
+                       <option value="2006">2006</option>
+                       <option value="2007">2007</option>
+                       <option value="2008">2008</option>
+                       <option value="2009">2009</option>
+                       <option value="2010">2010</option>
+                       <option value="2011">2011</option>
+                       <option value="2012">2012</option>
+                       <option value="2013">2013</option>
+                       <option value="2014">2014</option>
+                       <option value="2015">2015</option>
+                       <option value="2016">2016</option>
+                       <option value="2017">2017</option>
+                       <option value="2018">2018</option>
+                       <option value="2019">2019</option>
+                       <option value="2020">2020</option>
+                       <option value="2021">2021</option>
+                       <option value="2022">2022</option>
+                     </select>
+                 </div>
+               </div>
+ 
+               <div class="row">
+                 <div class="col-sm-4">
+                   <h6 class="mb-0">Condition</h6>
+                 </div>
+                 <div class="form-group">
+                   <select name="condition" id="Condition" class="custom-select">
+                     <option value="Deadstock" selected>Deadstock</option>
+                     <option value="Rarely_Used">Rarely Used</option>
+                     <option value="Gently_Used">Gently Used</option>
+                     <option value="Worn">Worn</option>
+                     <option value="Beaters">Heavily Worn</option>
+                   </select>
+                 </div>
+               </div>
+               <hr>
+               <div class="row">
+                 <div class="col-sm-4">
+                   <h6 class="mb-0">City</h6>
+                 </div>
+                 <div class="form-group">
+                     <input
+                       type="text"
+                       name="NewLName"
+                       placeholder="City"
+                       class="form-control"
+                     />
+                 </div>
+               </div>
+ 
+               <div class="row">
+                 <div class="col-sm-4">
+                   <h6 class="mb-0">Quadrant</h6>
+                 </div>
+                 <div class="form-group">
+                   <select name="quadrant" id="Quadrant" class="custom-select">
+                     <option value="SW" selected>SW</option>
+                     <option value="SE">SE</option>
+                     <option value="NW">NW</option>
+                     <option value="NE">NE</option>
+                   </select>
+                 </div>
+               </div>
+ 
+               </div>
+               <div class="form-group text-center">
+                 <input
+                   type="submit"
+                   value="Post Listing"
+                   class="btn btn-primary"
+                   style="border: none; background-color: rgba(110, 110, 110, 0.829)"
+                 />
+               </div>
+             </div>
+             </div>
+           </div>
+         </div>
+       </form>
+  
+     </div>
+   </div>
+  </div>
+  <div>
+  </div>
+ </body>
+</html>
