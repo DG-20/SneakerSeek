@@ -9,4 +9,6 @@ urlpatterns = [
     path("results/<str:pk>", views.results, name="results"),
     path("product/<str:pk>", views.product, name="product"),
     path("logout_view", views.logout_view, name="logout_view"),
+    path("settings", views.settings, name="settings"),
+    path("profile", views.profile, name="profile"),
 ]

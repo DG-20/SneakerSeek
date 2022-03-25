@@ -117,6 +117,28 @@ def logout_view(request):
     logout(request)
     return redirect("index")
 
+@login_required
+def settings(request):
+    if request.method != "POST":
+        return render(request, "settings.html")
+    
+    else:
+        firstName = request.POST["f_name"]
+        lastName = request.POST["l_name"]
+        type = request.POST["type"]
+        max_price = request.POST["max_price"]
+        gender = request.POST["gender"]
+        condition = request.POST["condition"]
+        quadrant = request.POST["quadrant"]
+        city = request.POST["city"]
+        #if firstname is empty dont update if it isnt empty then update it
+        #if old password is not empty then compare to current password if they match then
+        #if newpassword equals renewpassword then update password
+        #if old password is incorrect or two new passwords dont match then need to show a message similar to register
+
+@login_required
+def profile(request):
+    return render(request, "profile.html")
 
 def sample_data():
     shoe1 = Shoe(
