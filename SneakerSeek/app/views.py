@@ -106,10 +106,20 @@ def results(request, pk):
 def product(request, pk):
     if request.method != "POST":
 
-        return render(request, "product.html", {"product": sample_data()[0]})
+        return render(
+            request, "product.html", {"product": sample_data()[0], "seller_view": False}
+        )
 
     else:
         a = 2
+
+
+@login_required
+def sell_shoe(request):
+    if request.method != "POST":
+        return render(request, "sell_shoe.html")
+    else:
+        b = 2
 
 
 @login_required
@@ -165,4 +175,17 @@ def sample_data():
         city="Chicago",
     )
 
-    return [shoe1, shoe2, shoe3]
+    return [
+        shoe1,
+        shoe2,
+        shoe3,
+        shoe1,
+        shoe2,
+        shoe3,
+        shoe1,
+        shoe2,
+        shoe3,
+        shoe1,
+        shoe2,
+        shoe3,
+    ]
