@@ -31,62 +31,62 @@
       href="https://fonts.googleapis.com/css2?family=Hurricane&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <title>Change Profile Info</title>
   </head>
   <body
     style="
       background-image: linear-gradient(
-        rgba(255, 255, 255, 0.192),
-              rgba(32, 32, 32, 0.822)
+          rgba(255, 255, 255, 0.192),
+          rgba(32, 32, 32, 0.822)
         ),
         url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v1016-a-02d-ksh6raod.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=d757a7735c64f48e47971cfaae806cb1);
       background-size: cover;
     "
   >
-  <nav
-  class="navbar navbar-expand-lg navbar-light sticky-top bg-light"
-  style="border-radius: 25px"
->
-  <a
-    class="navbar-brand"
-    href="../search_view"
-    style="font-family: hurricane; font-size: 25px; font-weight: bold"
-    >SneakerSeek</a
-  >
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbar"
-    aria-controls="navbar"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbar">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="../search_view"
-          >Search <span class="sr-only">(current)</span></a
-        >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="../profile">Profile</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="../sell">Sell a Shoe</a>
-      </li>
-    </ul>
-    <span class="nav-item">
-      <a href="../logout_view" class="text-muted">Logout</a>
-    </span>
-  </div>
-</nav>
+    <nav
+      class="navbar navbar-expand-lg navbar-light sticky-top bg-light"
+      style="border-radius: 25px"
+    >
+      <a
+        class="navbar-brand"
+        href="../search_view"
+        style="font-family: hurricane; font-size: 25px; font-weight: bold"
+        >SneakerSeek</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+        aria-controls="navbar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="../search_view"
+              >Search <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../sell">Sell a Shoe</a>
+          </li>
+        </ul>
+        <span class="nav-item">
+          <a href="../logout_view" class="text-muted">Logout</a>
+        </span>
+      </div>
+    </nav>
     <div class="container">
       <div
         class="d-flex align-items-center justify-content-center"
-        style="width: 100%; height: 110vh"
+        style="width: 100%; height: 100vh"
       >
         <form
           action="settings"
@@ -97,8 +97,8 @@
             border-radius: 25px;
             font-family: 'Signika', sans-serif;
             background-image: linear-gradient(
-              rgba(133, 133, 133, 0.5),
-              rgba(48, 48, 48, 0.486)
+                rgba(133, 133, 133, 0.5),
+                rgba(48, 48, 48, 0.486)
               ),
               url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
             background-size: cover;
@@ -107,7 +107,7 @@
             box-shadow: 3px 3px 5px rgb(206, 206, 206);
           "
         >
-        {% csrf_token %}
+          {% csrf_token %}
           <div class="row">
             <div class="col">
               <div class="form-group">
@@ -115,7 +115,8 @@
                 <br />
                 <input
                   type="text"
-                  name="f_name"cd 
+                  name="f_name"
+                  cd
                   placeholder="Enter New First Name"
                   class="form-control"
                 />
