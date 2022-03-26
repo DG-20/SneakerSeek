@@ -84,6 +84,9 @@
           <li class="nav-item">
             <a class="nav-link" href="../sell">Sell a Shoe</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="../my_shoes">My Shoes</a>
+          </li>
         </ul>
         <span class="nav-item">
           <a href="../logout_view" class="text-muted">Logout</a>
@@ -129,53 +132,57 @@
               </div>
             </div>
           </div>
+          <br />
           <div class="row text-center">
             <div class="col-6">
-              <p class="text-muted">
+              <p style="color: rgb(54, 54, 54)">
                 <strong>Brand: </strong>{{product.brand}}
               </p>
             </div>
             <div class="col-6">
-              <p class="text-muted">
+              <p style="color: rgb(54, 54, 54)">
                 <strong>Shoe Type: </strong>{{product.shoe_type}}
               </p>
             </div>
           </div>
           <div class="row text-center">
             <div class="col-6">
-              <p class="text-muted">
+              <p style="color: rgb(54, 54, 54)">
                 <strong>Gender: </strong>{{product.gender}}
               </p>
             </div>
             <div class="col-6">
-              <p class="text-muted"><strong>Size: </strong>{{product.size}}</p>
+              <p style="color: rgb(54, 54, 54)">
+                <strong>Size: </strong>{{product.size}}
+              </p>
             </div>
           </div>
           <div class="row text-center">
             <div class="col-6">
-              <p class="text-muted">
+              <p style="color: rgb(54, 54, 54)">
                 <strong>Condition: </strong>{{product.condition}}
               </p>
             </div>
             <div class="col-6">
-              <p class="text-muted">
+              <p style="color: rgb(54, 54, 54)">
                 <strong>Year Made: </strong>{{product.year_manufactured}}
               </p>
             </div>
           </div>
           <div class="row text-center">
             <div class="col-6">
-              <p class="text-muted">
+              <p style="color: rgb(54, 54, 54)">
                 <strong>Location: </strong>{{product.quadrant}},
                 {{product.city}}
               </p>
             </div>
             <div class="col-6">
-              <p class="text-muted">
+              <p style="color: rgb(54, 54, 54)">
                 <strong>Asking Price: </strong>${{product.price}}
               </p>
             </div>
           </div>
+          {% if user.username != product.seller %}
           <br />
           <br />
           <div class="row text-center">
@@ -226,21 +233,9 @@
                   />
                 </div>
                 <div class="form-group">
-                  <label for="message" class="">Your Message</label>
-                  <textarea
-                    type="text"
-                    id="message"
-                    name="message"
-                    class="form-control text-center"
-                    placeholder="Type in Your Message"
-                    style="border-radius: 25px"
-                    required
-                  ></textarea>
-                </div>
-                <div class="form-group">
                   <input
                     type="submit"
-                    value="Send to Seller!"
+                    value="Inform Seller!"
                     class="form-control"
                     style="
                       border: none;
@@ -254,6 +249,7 @@
             </div>
           </div>
         </div>
+        {% endif %}
       </div>
     </div>
   </body>

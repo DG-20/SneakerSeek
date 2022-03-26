@@ -187,6 +187,11 @@ def profile(request):
     return render(request, "profile.html")
 
 
+@login_required
+def my_shoes(request):
+    return render(request, "my_shoes.html")
+
+
 def sample_data():
     shoe1 = Shoe(
         brand="Nike",
