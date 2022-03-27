@@ -105,9 +105,24 @@ def results(request, pk):
 @login_required
 def product(request, pk):
     if request.method != "POST":
-
+        buyers = [
+            {
+                "username": "CurtisS",
+                "f_name": "Curtis",
+                "l_name": "S",
+                "email": "curtis@gmail.com",
+            },
+            {
+                "username": "LiamP",
+                "f_name": "Liam",
+                "l_name": "P",
+                "email": "liam@gmail.com",
+            },
+        ]
         return render(
-            request, "product.html", {"product": sample_data()[0], "seller_view": False}
+            request,
+            "product.html",
+            {"product": sample_data()[0], "seller_view": False, "buyers": buyers},
         )
 
     else:
@@ -240,6 +255,12 @@ def sample_data():
     )
 
     return [
+        shoe1,
+        shoe2,
+        shoe3,
+        shoe1,
+        shoe2,
+        shoe3,
         shoe1,
         shoe2,
         shoe3,

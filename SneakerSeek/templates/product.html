@@ -38,6 +38,30 @@
       rel="stylesheet"
     />
     <title>Search Results</title>
+    <style>
+      body::-webkit-scrollbar {
+        width: 15px;
+        background-color: transparent;
+      }
+
+      body::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+
+      body::-webkit-scrollbar-thumb {
+        background-color: #bbbbbb;
+        border-radius: 25px;
+        background-clip: content-box;
+      }
+
+      body::-webkit-scrollbar-thumb:hover {
+        background-color: #949494;
+      }
+
+      body::-webkit-scrollbar-thumb:active {
+        background-color: #636363;
+      }
+    </style>
   </head>
   <body
     style="
@@ -97,7 +121,10 @@
     <div
       class="container"
       style="
-        padding: 3%;
+        padding-top: 3%;
+        padding-right: 3%;
+        padding-left: 3%;
+        padding-bottom: 3%;
         border-style: solid;
         border-radius: 25px;
         font-family: 'Sora', sans-serif;
@@ -247,6 +274,42 @@
                 </div>
               </form>
             </div>
+          </div>
+        </div>
+        {% else %}
+        <br />
+        <br />
+        <div class="row text-center">
+          <div class="col-12">
+            <p
+              class="display-4 text-center"
+              style="font-size: large; font-family: 'Sora', sans-serif"
+            >
+              Information of Buyers Interested in This Product:
+            </p>
+            <table
+              class="table table-hover"
+              style="text-align: center; font-family: 'Sora', sans-serif"
+            >
+              <thead>
+                <tr style="color: white">
+                  <th scope="col">Username</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for buyer in buyers %}
+                <tr>
+                  <td>{{buyer.username}}</td>
+                  <td>{{buyer.f_name}}</td>
+                  <td>{{buyer.l_name}}</td>
+                  <td>{{buyer.email}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
         </div>
         {% endif %}

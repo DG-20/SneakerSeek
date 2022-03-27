@@ -43,6 +43,30 @@
         height: 100%;
       }
     </style>
+    <style>
+      body::-webkit-scrollbar {
+        width: 15px;
+        background-color: transparent;
+      }
+
+      body::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+
+      body::-webkit-scrollbar-thumb {
+        background-color: #bbbbbb;
+        border-radius: 25px;
+        background-clip: content-box;
+      }
+
+      body::-webkit-scrollbar-thumb:hover {
+        background-color: #949494;
+      }
+
+      body::-webkit-scrollbar-thumb:active {
+        background-color: #636363;
+      }
+    </style>
   </head>
 
   <body
@@ -103,7 +127,7 @@
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-lg-6 mb-4 mb-lg-0">
           <div
-            class="card mb-3"
+            class="card shadow mb-3"
             style="
               border-radius: 25px;
               padding: 3%;
@@ -118,7 +142,6 @@
               background-size: cover;
               color: white;
               border: none;
-              box-shadow: 3px 3px 5px rgb(206, 206, 206);
             "
           >
             <div class="row g-0">
@@ -132,21 +155,23 @@
                 <img
                   src="https://images-ext-2.discordapp.net/external/DX1yEwq7K-AjG-GSP3x66B_n61-aBlNut6zgXvouNTw/https/www.pngall.com/wp-content/uploads/5/User-Profile-PNG-High-Quality-Image.png?width=663&height=663"
                   alt="Avatar"
-                  class="img-fluid my-5"
+                  class="img-fluid my-4"
                   style="width: 80px; filter: grayscale(90%)"
                 />
-                <h5>{{user.first_name }} {{user.last_name}}</h5>
-                <p>{{user.username}}</p>
+                <h5 style="color: rgb(54, 54, 54)">
+                  {{user.first_name }} {{user.last_name}}
+                </h5>
+                <p style="color: rgb(54, 54, 54)">{{user.username}}</p>
                 <i class="far fa-edit mb-5"></i>
               </div>
               <div class="col-md-8">
                 <div class="card-body p-4">
-                  <h6>Information</h6>
+                  <h5>Information</h5>
                   <hr class="mt-0 mb-4" />
                   <div class="row pt-1">
                     <div class="col-7 mb-3">
-                      <h6>Email</h6>
-                      <p class="text-muted">{{user.email}}</p>
+                      <h5>Email</h5>
+                      <p style="color: rgb(54, 54, 54)">{{user.email}}</p>
                     </div>
                     <div class="col-9 mb-3">
                       <button

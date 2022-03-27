@@ -5,6 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SneakerSeek</title>
+    <style>
+      body::-webkit-scrollbar {
+        width: 15px;
+        background-color: transparent;
+      }
+
+      body::-webkit-scrollbar-track {
+        background-color: transparent;
+      }
+
+      body::-webkit-scrollbar-thumb {
+        background-color: #bbbbbb;
+        border-radius: 25px;
+        background-clip: content-box;
+      }
+
+      body::-webkit-scrollbar-thumb:hover {
+        background-color: #949494;
+      }
+
+      body::-webkit-scrollbar-thumb:active {
+        background-color: #636363;
+      }
+    </style>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
@@ -58,6 +82,7 @@
         <form
           method="POST"
           action="index"
+          class="shadow"
           style="
             padding: 5%;
             border-style: solid;
@@ -71,7 +96,6 @@
             background-size: cover;
             color: white;
             border: none;
-            box-shadow: 3px 3px 5px rgb(206, 206, 206);
           "
         >
           {% csrf_token %}
