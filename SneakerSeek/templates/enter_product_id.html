@@ -115,87 +115,73 @@
         </span>
       </div>
     </nav>
-    <div class="container" style="padding: 3%">
-      <div
-        style="
-          text-align: center;
-          text-decoration: underline;
-          font-size: calc(100% + 2vw + 1vh);
-          font-family: 'Sora', sans-serif;
-          color: rgb(54, 54, 54);
-        "
-        class="display-4"
-      >
-        Shoes Matching Your Search Criteria
-      </div>
-      <br />
-      <div
-        class="table-responsive-sm shadow"
-        style="
-          padding: 3%;
-          border-style: solid;
-          border-radius: 25px;
-          font-family: 'Sora', sans-serif;
-          background-image: linear-gradient(
-              rgba(133, 133, 133, 0.5),
-              rgba(48, 48, 48, 0.486)
-            ),
-            url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
-          background-size: cover;
-          color: white;
-          border: none;
-        "
-      >
-        <table class="table table-hover" style="text-align: center">
-          <thead>
-            <tr style="color: white">
-              <th scope="col">Shoe Name</th>
-              <th scope="col">Image</th>
-              <th scope="col">List Price</th>
-              <th scope="col">Size</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Condition</th>
-              <th scope="col">City</th>
-              <th scope="col">Select</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for shoe in shoes %}
-            <tr>
-              <td>{{shoe.title}}</td>
-              <td>
-                <img
-                  src="{{shoe.image_url}}"
-                  width="100"
-                  style="border-radius: 15px"
+
+    <!--<div class="container" style="padding: 20px;">-->
+    <form style="padding-top: 20px;">
+      <div class="col-md-8 mx-auto" style="max-width: 60%">
+        <div
+          class="card shadow mb-3 p-3 mb-5 bg-white"
+          style="
+            padding: 5%;
+            border-style: solid;
+            border-radius: 50px;
+            font-family: 'Sora', sans-serif;
+            background-image: linear-gradient(
+                rgba(133, 133, 133, 0.5),
+                rgba(48, 48, 48, 0.486)
+              ),
+              url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
+            background-size: cover;
+            color: white;
+            border: none;
+          "
+        >
+          <div class="card-body" width="150"> 
+            <div class="row justify-content-center">
+              <div class="col-sm-4">
+                <h6 class="mb-0">Date</h6>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="NewLName"
+                  placeholder="03/27/2022"
+                  class="form-control"
+                  disabled
                 />
-              </td>
-              <td>{{shoe.price}}</td>
-              <td>{{shoe.size}}</td>
-              <td>{{shoe.gender}}</td>
-              <td>{{shoe.condition}}</td>
-              <td>{{shoe.city}}</td>
-              <td>
-                <form action="results" method="POST">
-                  {% csrf_token %}
-                  <input type="hidden" name="id" value="{{shoe.product_id}}" />
-                  <input
-                    type="submit"
-                    value="More Information"
-                    class="btn btn-primary"
-                    style="
-                      border: none;
-                      background-color: rgba(110, 110, 110, 0.829);
-                    "
-                  />
-                </form>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+              </div>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-sm-4">
+                <h6 class="mb-0">Enter Shoe Listing ID</h6>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="NewLName"
+                  placeholder=""
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            
+          </div>
+          <div class="form-group text-center">
+            <input
+              type="submit"
+              value="Post Listing"
+              class="btn btn-primary"
+              style="
+                border: none;
+                background-color: rgba(110, 110, 110, 0.829);
+              "
+            />
+          </div>
+        </div>
       </div>
-    </div>
-    <br />
+    </form>
+    <!--</div>-->
   </body>
 </html>
