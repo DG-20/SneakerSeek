@@ -209,7 +209,7 @@
               </p>
             </div>
           </div>
-          {% if user.username != product.seller %}
+          {% if user.username != product.seller and user.is_superuser == False %}
           <br />
           <br />
           <div class="row text-center">
@@ -276,7 +276,7 @@
             </div>
           </div>
         </div>
-        {% else %}
+        {% elif user.usrname == product.seller or user.is_superuser %}
         <br />
         <br />
         <div class="row text-center">
@@ -312,7 +312,7 @@
             </table>
           </div>
         </div>
-        {% endif %}
+        {% else %} {% endif %}
       </div>
     </div>
   </body>
