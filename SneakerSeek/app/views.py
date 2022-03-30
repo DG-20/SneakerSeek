@@ -223,7 +223,42 @@ def manage_users(request):
 
 @login_required
 def edit_shoe(request, pk):
-    return render(request, "edit_shoe.html")
+    product = sample_data()[0]
+    Brands = [
+        "Air Jordan",
+        "Nike",
+        "Adidas",
+        "Under Armour",
+        "New Balance",
+        "Converse",
+        "Common Projects",
+        "Puma",
+        "Vans",
+        "Reebok",
+        "Balenciaga",
+        "Asics",
+        "Gucci",
+        "Sketchers",
+        "Fila",
+    ]
+    Type = ["Highs", "Lows", "Mids", "Slides", "High Heels", "Slippers", "Oxfords"]
+    Gender = ["Male", "Female", "Unisex"]
+    Condition = ["Deadstock", "Rarely Used", "Gently Used", "Worn", "Heavily Worn"]
+    Quadrant = ["SW", "SE", "NE", "NW"]
+    return render(
+        request,
+        "edit_shoe.html",
+        {
+            "shoe": product,
+            "Brands": Brands,
+            "range": range(6, 15),
+            "type": Type,
+            "gender": Gender,
+            "condition": Condition,
+            "quadrant": Quadrant,
+            "years": range(1990, 2023),
+        },
+    )
 
 
 def sample_data():
@@ -318,4 +353,6 @@ def sample_data():
         city="Chicago",
     )
 
-    return [shoe1, shoe2, shoe4, shoe5]
+    return [
+        shoe1,
+    ]

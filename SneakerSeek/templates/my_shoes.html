@@ -71,6 +71,7 @@
         ),
         url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v1016-a-02d-ksh6raod.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=d757a7735c64f48e47971cfaae806cb1);
       background-size: cover;
+      background-attachment: fixed;
     "
   >
     <nav
@@ -123,7 +124,6 @@
     </nav>
 
     <div class="container">
-      <!-- Page Heading -->
       <h1 class="my-4">My Shoes:</h1>
 
       <div class="row">
@@ -146,7 +146,6 @@
             <img
               class="card-img-top"
               src="{{product.image_url}}"
-              alt=""
               style="
                 border-top-left-radius: 25px;
                 border-top-right-radius: 25px;
@@ -163,13 +162,7 @@
               <div class="row justify-content-center">
                 <p class="card-text">List Price: ${{product.price}}</p>
               </div>
-              <form action="my_shoes" method="POST" style="margin-bottom: 0">
-                {% csrf_token %}
-                <input
-                  type="hidden"
-                  name="product_id"
-                  value="{{product.product_id}}"
-                />
+              <a href="{% url 'edit_shoe' pk=product.product_id %}">
                 <button
                   type="button"
                   class="btn btn-primary btn-sm btn-block"
@@ -180,10 +173,15 @@
                 >
                   Edit
                 </button>
+              </a>
 
-                <button type="button" class="btn btn-danger btn-sm btn-block">
-                  Delete
-                </button>
+              <form action="my_shoes" method="POST">
+                {% csrf_token %}
+                <input
+                  type="submit"
+                  class="btn btn-danger btn-sm btn-block form-control"
+                  value="Delete"
+                />
               </form>
             </div>
           </div>
