@@ -273,7 +273,7 @@ def sample_data():
         quadrant="SW",
         seller="Div",
         image_url="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/6f950390-c74c-41dd-90c6-9fae9c6adbdf/air-force-1-high-07-lx-mens-shoes-wTttNP.png",
-        title="Nike Highs Brand New",
+        title="Nike Air Force 1 High Brand New",
         product_id="12341234",
         city="Calgary",
     )
@@ -303,7 +303,7 @@ def sample_data():
         quadrant="SE",
         seller="Liam",
         image_url="https://process.fs.grailed.com/AJdAgnqCST4iPtnUxiGtTz/cache=expiry:max/rotate=deg:exif/resize=width:2400,fit:crop/output=quality:70/compress/https://process.fs.grailed.com/z0qM3P5pR3a9viT9MCon",
-        title="Jordan 1s Brand New",
+        title="Jordan 1 High Bred Brand New",
         product_id="34563456",
         city="Chicago",
     )
@@ -318,7 +318,7 @@ def sample_data():
         quadrant="NW",
         seller="Curtis",
         image_url="https://nb.scene7.com/is/image/NB/bb550pb1_nb_02_i?$dw_detail_gallery$",
-        title="New Balances Rarely Used",
+        title="New Balance S550 Rarely Used",
         product_id="45674567",
         city="Calgary",
     )
@@ -333,7 +333,7 @@ def sample_data():
         quadrant="SW",
         seller="Div",
         image_url="https://images.vans.com/is/image/Vans/D3HY28-HERO?$583x583$",
-        title="Vans Brand New",
+        title="Vans Old Skool Skate Shoe Brand New",
         product_id="56785678",
         city="Calgary",
     )
@@ -348,7 +348,7 @@ def sample_data():
         quadrant="NE",
         seller="Liam",
         image_url="https://images.solecollector.com/complex/images/c_crop,h_2921,w_5193,x_772,y_440/f_auto,fl_lossy,q_auto,w_1200/qsdrtn3exos5qn5zkvg8/air-jordan-1-chicago.jpg",
-        title="Jordan 1s Rarely Used",
+        title="Jordan 1 High Chicago Rarely Used",
         product_id="67896789",
         city="Chicago",
     )
