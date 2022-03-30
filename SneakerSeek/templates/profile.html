@@ -161,7 +161,7 @@
                   src="https://drive.google.com/uc?export=view&id=1Z8AMdSlTIXB8mw3e8BU8wEs36ROk7tf5"
                   alt="Avatar"
                   class="img-fluid my-4"
-                  style="width: 80px; filter: brightness(130%)"
+                  style="width: 100px; filter: brightness(130%)"
                 />
                 <h5 style="color: rgb(54, 54, 54)">
                   {{user.first_name }} {{user.last_name}}
@@ -169,16 +169,17 @@
                 <p style="color: rgb(54, 54, 54)">{{user.username}}</p>
                 <i class="far fa-edit mb-5"></i>
               </div>
+
               <div class="col-md-8">
                 <div class="card-body p-4">
                   <h5>Information</h5>
                   <hr class="mt-0 mb-4" />
                   <div class="row pt-1">
-                    <div class="col-7 mb-3">
+                    <div class="col-12 mb-3">
                       <h5>Email</h5>
                       <p style="color: rgb(54, 54, 54)">{{user.email}}</p>
                     </div>
-                    <div class="col-9 mb-3">
+                    <div class="col text-center">
                       <button
                         class="btn btn-primary"
                         onclick="window.location.href = '../settings'"
