@@ -110,6 +110,11 @@
           <li class="nav-item active">
             <a class="nav-link" href="../my_shoes">My Shoes</a>
           </li>
+          {% if user.is_superuser == True %}
+          <li class="nav-item">
+            <a class="nav-link" href="../manage_users">Manage Users</a>
+          </li>
+          {% endif %}
         </ul>
         <span class="nav-item" style="font-family: 'Sora', sans-serif">
           <a href="../logout_view" class="text-muted">Logout</a>
@@ -119,87 +124,101 @@
 
     <div class="container">
       <!-- Page Heading -->
-      <h1 class="my-4">
-        My Listings:
-        <small>{Username}</small>
-      </h1>
+      <h1 class="my-4">My Shoes:</h1>
 
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-          <div class="card" style="border-radius: 25px; background-image: linear-gradient(
-              rgba(133, 133, 133, 0.5),
-              rgba(48, 48, 48, 0.486)
-            ),
-            url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
-            background-size: cover;
-            color: white;
-            border: none;"> 
+          <div
+            class="card"
+            style="
+              border-radius: 25px;
+              background-image: linear-gradient(
+                  rgba(133, 133, 133, 0.5),
+                  rgba(48, 48, 48, 0.486)
+                ),
+                url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
+              background-size: cover;
+              color: white;
+              border: none;
+            "
+          >
             <a href="#"
               ><img
                 class="card-img-top"
                 src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/6f950390-c74c-41dd-90c6-9fae9c6adbdf/air-force-1-high-07-lx-mens-shoes-wTttNP.png"
                 alt=""
-                style="border-top-left-radius: 25px; border-top-right-radius: 25px;"
+                style="
+                  border-top-left-radius: 25px;
+                  border-top-right-radius: 25px;
+                "
               />
             </a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#" style="color: white;">Nike Highs Brand New</a>
+                <a href="#" style="color: white">Nike Highs Brand New</a>
               </h4>
               <div class="row justify-content-center">
-                <p class="card-text">
-                  List Price: $
-                </p>
-                <p class="card-text">
-                  189.99
-                </p>
+                <p class="card-text">List Price: $</p>
+                <p class="card-text">189.99</p>
               </div>
-              <button type="button" class="btn btn-secondary btn-sm btn-block">Edit</button>
+              <button type="button" class="btn btn-secondary btn-sm btn-block">
+                Edit
+              </button>
 
-              <button type="button" class="btn btn-danger btn-sm btn-block">Delete</button>
+              <button type="button" class="btn btn-danger btn-sm btn-block">
+                Delete
+              </button>
             </div>
           </div>
         </div>
 
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-          <div class="card" style="border-radius: 25px; background-image: linear-gradient(
-              rgba(133, 133, 133, 0.5),
-              rgba(48, 48, 48, 0.486)
-            ),
-            url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
-            background-size: cover;
-            color: white;
-            border: none;">
+          <div
+            class="card"
+            style="
+              border-radius: 25px;
+              background-image: linear-gradient(
+                  rgba(133, 133, 133, 0.5),
+                  rgba(48, 48, 48, 0.486)
+                ),
+                url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
+              background-size: cover;
+              color: white;
+              border: none;
+            "
+          >
             <a href="#">
               <img
                 class="card-img-top"
                 src="https://images.vans.com/is/image/Vans/D3HY28-HERO?$583x583$"
                 alt=""
-                style="border-top-left-radius: 25px; border-top-right-radius: 25px;"
+                style="
+                  border-top-left-radius: 25px;
+                  border-top-right-radius: 25px;
+                "
               />
             </a>
             <div class="card-body">
               <h4 class="card-title">
-                <a href="#" style="color: white;">Jordan 1s Brand New</a>
+                <a href="#" style="color: white">Jordan 1s Brand New</a>
               </h4>
               <div class="row justify-content-center">
-                <p class="card-text">
-                  List Price: $
-                </p>
-                <p class="card-text">
-                  1100.00
-                </p>
+                <p class="card-text">List Price: $</p>
+                <p class="card-text">1100.00</p>
               </div>
-              <button type="button" class="btn btn-secondary btn-sm btn-block">Edit</button>
+              <button type="button" class="btn btn-secondary btn-sm btn-block">
+                Edit
+              </button>
 
-              <button type="button" class="btn btn-danger btn-sm btn-block">Delete</button>
+              <button type="button" class="btn btn-danger btn-sm btn-block">
+                Delete
+              </button>
             </div>
           </div>
         </div>
-        
       </div>
       <!-- /.row -->
-      <hr>
+      <hr />
       <!-- Pagination -->
       <ul class="pagination justify-content-center">
         <li class="page-item">

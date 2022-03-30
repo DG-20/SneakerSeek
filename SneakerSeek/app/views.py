@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
-from django.contrib.auth import logout
+from django.contrib.auth import logout, get_user_model
 from django.contrib import messages
 from .models import Shoe
 
@@ -206,9 +206,18 @@ def profile(request):
 def my_shoes(request):
     return render(request, "my_shoes.html")
 
+
 @login_required
 def manage_users(request):
-    return render(request, "manage_users.html")
+    if request.user.is_superuser == False:
+        return redirect("search_view")
+    else:
+        all_users = get_user_model().objects.all()
+        site_users = []
+        for all_user in all_users:
+            if all_user != request.user:
+                site_users.append(all_user)
+        return render(request, "manage_users.html", {"site_users": site_users})
 
 
 def sample_data():

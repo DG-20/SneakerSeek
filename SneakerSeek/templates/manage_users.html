@@ -89,9 +89,11 @@
           <li class="nav-item">
             <a class="nav-link" href="../my_shoes">My Shoes</a>
           </li>
-          <li class="nav-item active">
+          {% if user.is_superuser == True %}
+          <li class="nav-item">
             <a class="nav-link" href="../manage_users">Manage Users</a>
           </li>
+          {% endif %}
         </ul>
         <span class="nav-item" style="font-family: 'Sora', sans-serif">
           <a href="../logout_view" class="text-muted">Logout</a>
@@ -132,57 +134,31 @@
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <!-- Actual Code
-                    <tbody>
-                    {% for buyer in buyers %}
-                    <tr>
-                    <td>{{buyer.username}}</td>
-                    <td>{{buyer.f_name}}</td>
-                    <td>{{buyer.l_name}}</td>
-                    <td>{{buyer.email}}</td>
-                    <td><button type="button" class="btn btn-danger btn-sm btn-block">Delete</button></td>
-                    </tr>
-                    </tbody>
-                    {% endfor %}
-                -->
-
-            <!--    Dummy Code  -->
             <tbody>
+              {% for site_user in site_users %}
               <tr>
-                <td>Curtis</td>
-                <td>Curtis</td>
-                <td>Silva</td>
-                <td>curtis@gmail.com</td>
+                <td>{{site_user.username}}{{site_user.last_name}}</td>
+                <td>{{site_user.first_name}}</td>
+                <td>{{site_user.last_name}}</td>
+                <td>{{site_user.email}}</td>
                 <td>
-                  <button type="button" class="btn btn-danger btn-sm btn-block">
-                    Delete
-                  </button>
+                  <form method="POST" action="manage_users" class="shadow">
+                    {% csrf_token %}
+                    <input
+                      type="hidden"
+                      name="username_del"
+                      value="{{site_user.username}}"
+                    />
+                    <button
+                      type="button"
+                      class="btn btn-danger btn-sm btn-block form-control"
+                    >
+                      Delete
+                    </button>
+                  </form>
                 </td>
               </tr>
-
-              <tr>
-                <td>Div</td>
-                <td>Div</td>
-                <td>Goyal</td>
-                <td>div@gmail.com</td>
-                <td>
-                  <button type="button" class="btn btn-danger btn-sm btn-block">
-                    Delete
-                  </button>
-                </td>
-              </tr>
-
-              <tr>
-                <td>Liam</td>
-                <td>Liam</td>
-                <td>Parmar</td>
-                <td>liam@gmail.com</td>
-                <td>
-                  <button type="button" class="btn btn-danger btn-sm btn-block">
-                    Delete
-                  </button>
-                </td>
-              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
