@@ -204,7 +204,8 @@ def profile(request):
 
 @login_required
 def my_shoes(request):
-    return render(request, "my_shoes.html")
+    products = sample_data()
+    return render(request, "my_shoes.html", {"products": products})
 
 
 @login_required
@@ -218,6 +219,11 @@ def manage_users(request):
             if all_user != request.user:
                 site_users.append(all_user)
         return render(request, "manage_users.html", {"site_users": site_users})
+
+
+@login_required
+def edit_shoe(request, pk):
+    return render(request, "edit_shoe.html")
 
 
 def sample_data():

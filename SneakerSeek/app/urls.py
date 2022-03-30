@@ -14,4 +14,5 @@ urlpatterns = [
     path("sell_shoe", views.sell_shoe, name="sell_shoe"),
     path("my_shoes", views.my_shoes, name="my_shoes"),
     path("manage_users", views.manage_users, name="manage_users"),
+    path("edit_shoe/<str:pk>", views.edit_shoe, name="edit_shoe"),
 ]
