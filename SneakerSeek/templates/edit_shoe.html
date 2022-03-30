@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="margin: 0; height: 100%">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -37,7 +37,7 @@
       href="https://fonts.googleapis.com/css2?family=Sora&display=swap"
       rel="stylesheet"
     />
-    <title>My Shoes</title>
+    <title>Sell a Shoe</title>
     <style>
       body::-webkit-scrollbar {
         width: 15px;
@@ -71,6 +71,7 @@
         ),
         url(https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/v1016-a-02d-ksh6raod.jpg?w=1200&h=1200&dpr=1&fit=clip&crop=default&fm=jpg&q=75&vib=3&con=3&usm=15&cs=srgb&bg=F4F4F3&ixlib=js-2.2.1&s=d757a7735c64f48e47971cfaae806cb1);
       background-size: cover;
+      background-attachment: fixed;
     "
   >
     <nav
@@ -104,10 +105,10 @@
           <li class="nav-item">
             <a class="nav-link" href="../profile">Profile</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="../sell_shoe">Sell a Shoe</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="../my_shoes">My Shoes</a>
           </li>
           {% if user.is_superuser == True %}
@@ -121,75 +122,236 @@
         </span>
       </div>
     </nav>
-
     <div class="container">
-      <!-- Page Heading -->
-      <h1 class="my-4">My Shoes:</h1>
+      <div class="main-body">
+        <br />
+        <br />
+        <form
+          action="settings_view"
+          method="POST"
+          style="padding-top: 0%; background-color: none; margin: auto"
+        >
+              <div class="card-body" width="150">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <h6 class="mb-0">Brand</h6>
+                  </div>
+                  <div class="form-group">
+                    <select name="brand" id="Brand" class="custom-select">
+                      <option value="Air_Jordan" selected>Air Jordan</option>
+                      <option value="Nike">Nike</option>
+                      <option value="Adidas">Adidas</option>
+                      <option value="Under_Armour">Under Armour</option>
+                      <option value="New_Balance">New Balance</option>
+                      <option value="Converse">Converse</option>
+                      <option value="Common_Projects">Common Projects</option>
+                      <option value="Puma">Puma</option>
+                      <option value="Vans">Vans</option>
+                      <option value="Reebok">Reebok</option>
+                      <option value="Balenciaga">Balenciaga</option>
+                      <option value="Asics">Asics</option>
+                      <option value="Gucci">Gucci</option>
+                      <option value="Sketchers">Sketchers</option>
+                      <option value="Fila">Fila</option>
+                    </select>
+                  </div>
+                </div>
 
-      <div class="row">
-        {% for product in products %}
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
-          <div
-            class="card"
-            style="
-              border-radius: 25px;
-              background-image: linear-gradient(
-                  rgba(133, 133, 133, 0.5),
-                  rgba(48, 48, 48, 0.486)
-                ),
-                url(https://1.bp.blogspot.com/-_B1NQqcUjG4/X58l93-TU-I/AAAAAAAAIAc/D464CPe7jjEm0XrZ7HNSNE8CsUPE2GBfQCLcBGAsYHQ/s960/background-ppt-white-shades.jpg);
-              background-size: cover;
-              color: white;
-              border: none;
-            "
-          >
-            <img
-              class="card-img-top"
-              src="{{product.image_url}}"
-              alt=""
-              style="
-                border-top-left-radius: 25px;
-                border-top-right-radius: 25px;
-              "
-            />
-            <div class="card-body">
-              <h4 class="card-title">
-                <a
-                  href="{% url 'product' pk=product.product_id %}"
-                  style="color: white"
-                  >{{product.title}}</a
-                >
-              </h4>
-              <div class="row justify-content-center">
-                <p class="card-text">List Price: ${{product.price}}</p>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <h6 class="mb-0">Size</h6>
+                  </div>
+                  <div class="form-group">
+                    <select name="size" id="Size" class="custom-select">
+                      <option value="6" selected>6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <h6 class="mb-0">Type</h6>
+                  </div>
+                  <div class="form-group">
+                    <select name="type" id="Type" class="custom-select">
+                      <option value="Highs" selected>Highs</option>
+                      <option value="Lows">Lows</option>
+                      <option value="Mids">Mids</option>
+                      <option value="Slides">Slides</option>
+                      <option value="Heels">High Heels</option>
+                      <option value="Slippers">Slippers</option>
+                      <option value="Oxfords">Oxfords</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <h6 class="mb-0">Shoe Name</h6>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="title"
+                      id="Title"
+                      class="form-control"
+                      placeholder="Shoe's Name"
+                      required
+                    />
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-4">
+                    <h6 class="mb-0">Price</h6>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                      </div>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="amount"
+                        placeholder="0.00"
+                        name="price"
+                        step="0.01"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-4">
+                    <h6 class="mb-0">Gender</h6>
+                  </div>
+                  <div class="form-group">
+                    <select name="price" id="Price" class="custom-select">
+                      <option value="Unisex" selected>Unisex</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <h6 class="mb-0">Year Manufactured</h6>
+                  </div>
+                  <div class="form-group">
+                    <select name="type" id="Type" class="custom-select">
+                      <option value="1990" selected>1990</option>
+                      <option value="1991">1991</option>
+                      <option value="1992">1992</option>
+                      <option value="1991">1993</option>
+                      <option value="1991">1994</option>
+                      <option value="1991">1995</option>
+                      <option value="1991">1996</option>
+                      <option value="1991">1997</option>
+                      <option value="1991">1998</option>
+                      <option value="1991">1999</option>
+                      <option value="2000">2000</option>
+                      <option value="2001">2001</option>
+                      <option value="2002">2002</option>
+                      <option value="2003">2003</option>
+                      <option value="2004">2004</option>
+                      <option value="2005">2005</option>
+                      <option value="2006">2006</option>
+                      <option value="2007">2007</option>
+                      <option value="2008">2008</option>
+                      <option value="2009">2009</option>
+                      <option value="2010">2010</option>
+                      <option value="2011">2011</option>
+                      <option value="2012">2012</option>
+                      <option value="2013">2013</option>
+                      <option value="2014">2014</option>
+                      <option value="2015">2015</option>
+                      <option value="2016">2016</option>
+                      <option value="2017">2017</option>
+                      <option value="2018">2018</option>
+                      <option value="2019">2019</option>
+                      <option value="2020">2020</option>
+                      <option value="2021">2021</option>
+                      <option value="2022">2022</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <h6 class="mb-0">Condition</h6>
+                  </div>
+                  <div class="form-group">
+                    <select
+                      name="condition"
+                      id="Condition"
+                      class="custom-select"
+                    >
+                      <option value="Deadstock" selected>Deadstock</option>
+                      <option value="Rarely_Used">Rarely Used</option>
+                      <option value="Gently_Used">Gently Used</option>
+                      <option value="Worn">Worn</option>
+                      <option value="Beaters">Heavily Worn</option>
+                    </select>
+                  </div>
+                </div>
+                <hr />
+                <div class="row">
+                  <div class="col-sm-4">
+                    <h6 class="mb-0">City</h6>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="NewLName"
+                      placeholder="City"
+                      class="form-control"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <h6 class="mb-0">Quadrant</h6>
+                  </div>
+                  <div class="form-group">
+                    <select
+                      name="quadrant"
+                      id="Quadrant"
+                      class="custom-select"
+                    >
+                      <option value="SW" selected>SW</option>
+                      <option value="SE">SE</option>
+                      <option value="NW">NW</option>
+                      <option value="NE">NE</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-              <form action="my_shoes" method="POST" style="margin-bottom: 0">
-                {% csrf_token %}
+              <div class="form-group text-center">
                 <input
-                  type="hidden"
-                  name="product_id"
-                  value="{{product.product_id}}"
-                />
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm btn-block"
+                  type="submit"
+                  value="Post Listing"
+                  class="btn btn-primary"
                   style="
                     border: none;
                     background-color: rgba(110, 110, 110, 0.829);
                   "
-                >
-                  Edit
-                </button>
-
-                <button type="button" class="btn btn-danger btn-sm btn-block">
-                  Delete
-                </button>
-              </form>
+                />
+              </div>
             </div>
           </div>
-        </div>
-        {% endfor %}
+        </form>
       </div>
     </div>
+    <div></div>
   </body>
 </html>
