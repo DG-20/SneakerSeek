@@ -206,6 +206,10 @@ def profile(request):
 def my_shoes(request):
     return render(request, "my_shoes.html")
 
+@login_required
+def manage_users(request):
+    return render(request, "manage_users.html")
+
 
 def sample_data():
     shoe1 = Shoe(
