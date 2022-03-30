@@ -111,6 +111,11 @@
           <li class="nav-item">
             <a class="nav-link" href="../my_shoes">My Shoes</a>
           </li>
+          {% if user.is_superuser == True %}
+          <li class="nav-item">
+            <a class="nav-link" href="../manage_users">Manage Users</a>
+          </li>
+          {% endif %}
         </ul>
         <span class="nav-item" style="font-family: 'Sora', sans-serif">
           <a href="../logout_view" class="text-muted">Logout</a>
