@@ -15,8 +15,37 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import api
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("app.urls")),
+    path("get_all_cities/<str:user_username>/", api.get_all_cities),
+    path(
+        "get_shoes_by_params/<str:brand>/<str:gender>/<str:type>/<str:size>/<str:condition>/<str:max_price>/<str:city>/<str:quadrant>/<str:user_username>/",
+        api.get_shoes_by_params,
+    ),
+    path("get_shoe_by_id/<str:shoe_id>/<str:user_username>/", api.get_shoe_by_id),
+    path(
+        "get_shoes_by_username/<str:username>/<str:user_username>/",
+        api.get_shoes_by_username,
+    ),
+    path(
+        "interested_in/<str:shoe_id>/<str:username>/<str:user_username>/",
+        api.interested_in,
+    ),
+    path(
+        "get_interested_by_shoe_id/<str:shoe_id>/<str:user_username>/",
+        api.get_interested_by_shoe_id,
+    ),
+    path("delete_shoe/<str:shoe_id>/<str:user_username>/", api.delete_shoe),
+    path("get_all_shoes/<str:user_username>/", api.get_all_shoes),
+    path(
+        "upload_shoe/<str:brand>/<str:size>/<str:type>/<str:name>/<str:price>/<str:gender>/<str:year>/<str:condition>/<str:city>/<str:quadrant>/<str:image_url>/<str:seller_username>/<str:user_username>/",
+        api.upload_shoe,
+    ),
+    path(
+        "update_shoe/<str:shoe_id>/<str:brand>/<str:size>/<str:type>/<str:name>/<str:price>/<str:gender>/<str:year>/<str:condition>/<str:city>/<str:quadrant>/<str:user_username>/",
+        api.update_shoe,
+    ),
 ]

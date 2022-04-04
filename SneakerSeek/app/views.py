@@ -4,6 +4,8 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import logout, get_user_model
 from django.contrib import messages
 from .models import Shoe
+import requests
+import json
 
 # Create your views here.
 def index(request):
@@ -67,8 +69,11 @@ def register(request):
 @login_required
 def search_view(request):
     if request.method != "POST":
-        # endpoint to grab all cities
-        cities = ["Calgary", "Edmonton", "Airdrie", "Red Deer", "Fort Mac"]
+        url = "http://127.0.0.1:8000/" + "get_all_cities/" + request.user.username + "/"
+        json_string_return = requests.get(url).json()
+        json_acceptable_string = json_string_return.replace("'", '"')
+        dict_cities = json.loads(json_acceptable_string)
+        cities = dict_cities["Cities"]
         context = {"cities": cities}
         return render(request, "search.html", context)
     else:
