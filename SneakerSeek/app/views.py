@@ -7,6 +7,8 @@ from .models import Shoe
 import requests
 import json
 
+sneakerseek_url = "http://127.0.0.1:8000/"
+
 # Create your views here.
 def index(request):
     if request.method == "POST":
@@ -69,7 +71,7 @@ def register(request):
 @login_required
 def search_view(request):
     if request.method != "POST":
-        url = "http://127.0.0.1:8000/" + "get_all_cities/" + request.user.username + "/"
+        url = f"{sneakerseek_url}get_all_cities/{request.user.username}/"
         json_string_return = requests.get(url).json()
         json_acceptable_string = json_string_return.replace("'", '"')
         dict_cities = json.loads(json_acceptable_string)
@@ -99,7 +101,10 @@ def results(request, pk):
         for pair in list_params:
             search[pair[0 : pair.find("=")]] = pair[pair.find("=") + 1 :]
 
-        shoes = sample_data()
+        url = f"{sneakerseek_url}get_shoes_by_params/{search['brand']}/{search['gender']}/{search['type']}/{search['size']}/{search['condition']}/{search['max_price']}/{search['city']}/{search['quadrant']}/{request.user.username}/"
+        json_return = requests.get(url).json()
+
+        shoes = convert_to_shoe(json_return)
         return render(request, "results.html", {"shoes": shoes})
 
     else:
@@ -124,10 +129,14 @@ def product(request, pk):
                 "email": "liam@gmail.com",
             },
         ]
+        url = f"{sneakerseek_url}get_shoe_by_id/{pk}/{request.user.username}/"
+        json_return = requests.get(url).json()
+
+        shoe = convert_to_shoe(json_return)[0]
         return render(
             request,
             "product.html",
-            {"product": sample_data()[0], "seller_view": False, "buyers": buyers},
+            {"product": shoe, "buyers": buyers},
         )
 
     else:
@@ -209,21 +218,35 @@ def profile(request):
 
 @login_required
 def my_shoes(request):
-    products = sample_data()
-    return render(request, "my_shoes.html", {"products": products})
+    if request.user.is_superuser == False:
+        url = f"{sneakerseek_url}get_shoes_by_username/{request.user.username}/{request.user.username}/"
+        json_return = requests.get(url).json()
+
+        shoes = convert_to_shoe(json_return)
+    else:
+        url = f"{sneakerseek_url}get_all_shoes/{request.user.username}/"
+        json_return = requests.get(url).json()
+
+        shoes = convert_to_shoe(json_return)
+    return render(request, "my_shoes.html", {"products": shoes})
 
 
 @login_required
 def manage_users(request):
     if request.user.is_superuser == False:
         return redirect("search_view")
-    else:
+    if request.method != "POST":
         all_users = get_user_model().objects.all()
         site_users = []
         for all_user in all_users:
             if all_user != request.user:
                 site_users.append(all_user)
         return render(request, "manage_users.html", {"site_users": site_users})
+    else:
+        user_to_delete = request.POST["username_del"]
+        user_del = User.objects.get(username=user_to_delete)
+        user_del.delete()
+        return redirect(manage_users)
 
 
 @login_required
@@ -361,3 +384,26 @@ def sample_data():
     return [
         shoe1,
     ]
+
+
+def convert_to_shoe(shoe_dicts):
+    shoes = []
+    for shoe in shoe_dicts:
+        shoes.append(
+            Shoe(
+                brand=shoe["brand"],
+                size=int(shoe["size"]),
+                shoe_type=shoe["type"],
+                price=float(shoe["price"]),
+                gender=shoe["gender"],
+                year_manufactured=shoe["year"],
+                condition=shoe["condition"],
+                quadrant=shoe["quadrant"],
+                seller=shoe["seller"],
+                image_url=shoe["image"],
+                title=shoe["title"],
+                product_id=shoe["_id"],
+                city=shoe["city"],
+            )
+        )
+    return shoes

@@ -141,7 +141,6 @@
         background-size: cover;
         color: white;
         border: none;
-        box-shadow: 3px 3px 5px rgb(206, 206, 206);
       "
     >
       <div class="row">
@@ -281,7 +280,7 @@
             </div>
           </div>
         </div>
-        {% elif user.usrname == product.seller or user.is_superuser %}
+        {% elif user.username == product.seller or user.is_superuser %}
         <br />
         <br />
         <div class="row text-center">
