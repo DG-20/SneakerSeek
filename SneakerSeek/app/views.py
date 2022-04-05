@@ -71,7 +71,7 @@ def register(request):
 @login_required
 def search_view(request):
     if request.method != "POST":
-        url = f"{sneakerseek_url}get_all_cities/{request.user.username}/"
+        url = f"{sneakerseek_url}get_all_cities/"
         json_string_return = requests.get(url).json()
         json_acceptable_string = json_string_return.replace("'", '"')
         dict_cities = json.loads(json_acceptable_string)
@@ -101,7 +101,7 @@ def results(request, pk):
         for pair in list_params:
             search[pair[0 : pair.find("=")]] = pair[pair.find("=") + 1 :]
 
-        url = f"{sneakerseek_url}get_shoes_by_params/{search['brand']}/{search['gender']}/{search['type']}/{search['size']}/{search['condition']}/{search['max_price']}/{search['city']}/{search['quadrant']}/{request.user.username}/"
+        url = f"{sneakerseek_url}get_shoes_by_params/{search['brand']}/{search['gender']}/{search['type']}/{search['size']}/{search['condition']}/{search['max_price']}/{search['city']}/{search['quadrant']}/"
         json_return = requests.get(url).json()
 
         shoes = convert_to_shoe(json_return)
@@ -129,7 +129,7 @@ def product(request, pk):
                 "email": "liam@gmail.com",
             },
         ]
-        url = f"{sneakerseek_url}get_shoe_by_id/{pk}/{request.user.username}/"
+        url = f"{sneakerseek_url}get_shoe_by_id/{pk}/"
         json_return = requests.get(url).json()
 
         shoe = convert_to_shoe(json_return)[0]
@@ -140,7 +140,14 @@ def product(request, pk):
         )
 
     else:
-        a = 2
+        name = request.POST["name"]
+        email = request.POST["email"]
+        product_id = request.POST["product_id"]
+
+        url = f"{sneakerseek_url}interested_in/{product_id}/{request.user.username}/"
+        http_return = requests.get(url)
+        print(http_return)
+        return redirect("search_view")
 
 
 @login_required
@@ -219,12 +226,12 @@ def profile(request):
 @login_required
 def my_shoes(request):
     if request.user.is_superuser == False:
-        url = f"{sneakerseek_url}get_shoes_by_username/{request.user.username}/{request.user.username}/"
+        url = f"{sneakerseek_url}get_shoes_by_username/{request.user.username}/"
         json_return = requests.get(url).json()
 
         shoes = convert_to_shoe(json_return)
     else:
-        url = f"{sneakerseek_url}get_all_shoes/{request.user.username}/"
+        url = f"{sneakerseek_url}get_all_shoes/"
         json_return = requests.get(url).json()
 
         shoes = convert_to_shoe(json_return)

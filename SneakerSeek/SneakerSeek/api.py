@@ -12,9 +12,16 @@ def connect_to_db():
     return MongoClient(HOST_Link).Sneakerseek
 
 
+def check_for_injections(parameters):
+    for param in parameters:
+        if "{" in param or "}" in param or "$" in param:
+            return True
+    return False
+
+
 # api_view([INSERT: "POST", retrieve: "GET", update: "PATCH"])
 @api_view(["GET"])
-def get_all_cities(request, user_username):
+def get_all_cities(request):
     if request.method == "GET":
         # if request.user.username != user_username:
         #    return HttpResponse("Please log in first!")
@@ -27,20 +34,18 @@ def get_all_cities(request, user_username):
 
 @api_view(["GET"])
 def get_shoes_by_params(
-    request,
-    brand,
-    gender,
-    type,
-    size,
-    condition,
-    max_price,
-    city,
-    quadrant,
-    user_username,
+    request, brand, gender, type, size, condition, max_price, city, quadrant
 ):
     if request.method == "GET":
         # if request.user.username != user_username:
         #    return HttpResponse("Please log in first!")
+        injection_exists = check_for_injections(
+            [brand, gender, type, size, condition, max_price, city, quadrant]
+        )
+
+        if injection_exists == True:
+            return HttpResponse("Unauthorized query!")
+
         search_criteria = {}
 
         if brand != "all":
@@ -80,10 +85,14 @@ def get_shoes_by_params(
 
 
 @api_view(["GET"])
-def get_shoe_by_id(request, shoe_id, user_username):
+def get_shoe_by_id(request, shoe_id):
     if request.method == "GET":
         # if request.user.username != user_username:
         #    return HttpResponse("Please log in first!")
+        injection_exists = check_for_injections([shoe_id])
+
+        if injection_exists == True:
+            return HttpResponse("Unauthorized query!")
 
         db_access = connect_to_db()
 
@@ -102,10 +111,14 @@ def get_shoe_by_id(request, shoe_id, user_username):
 
 
 @api_view(["GET"])
-def get_shoes_by_username(request, username, user_username):
+def get_shoes_by_username(request, username):
     if request.method == "GET":
         # if request.user.username != user_username:
         #    return HttpResponse("Please log in first!")
+        injection_exists = check_for_injections([username])
+
+        if injection_exists == True:
+            return HttpResponse("Unauthorized query!")
 
         db_access = connect_to_db()
 
@@ -124,8 +137,18 @@ def get_shoes_by_username(request, username, user_username):
 
 
 @api_view(["POST"])
-def interested_in():
-    a = 2
+def interested_in(request, shoe_id, username):
+    if request.method == "POST":
+        injection_exists = check_for_injections([shoe_id, username])
+
+        if injection_exists == True:
+            return HttpResponse("Unauthorized query!")
+
+        db_access = connect_to_db()
+        interest_insert = {"shoe_id": shoe_id, "username": username}
+        db_access.Interest.insert_one(interest_insert)
+
+    return HttpResponse("Success")
 
 
 @api_view(["GET"])
@@ -139,7 +162,7 @@ def delete_shoe():
 
 
 @api_view(["GET"])
-def get_all_shoes(request, user_username):
+def get_all_shoes(request):
     if request.method == "GET":
         # if request.user.username != user_username:
         #    return HttpResponse("Please log in first!")
