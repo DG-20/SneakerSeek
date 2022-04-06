@@ -213,8 +213,7 @@
               </p>
             </div>
           </div>
-          {% if user.username != product.seller and user.is_superuser == False
-          %}
+          {% if user.username != product.seller and user.is_superuser == False %}
           <br />
           <br />
           <div class="row text-center">
@@ -237,6 +236,7 @@
                 class="collapse multi-collapse"
                 name="contact-form"
                 method="POST"
+                action="product"
               >
                 {% csrf_token %}
                 <br />

@@ -137,23 +137,37 @@ def get_shoes_by_username(request, username):
 
 
 @api_view(["POST"])
-def interested_in(request, shoe_id, username):
+def interested_in(request):
     if request.method == "POST":
-        injection_exists = check_for_injections([shoe_id, username])
+        db_access = connect_to_db()
+        db_access.Interest.insert_one(request.data)
+        return HttpResponse("Success")
+
+
+@api_view(["GET"])
+def get_interested_by_shoe_id(request, shoe_id):
+    if request.method == "GET":
+        # if request.user.username != user_username:
+        #    return HttpResponse("Please log in first!")
+        injection_exists = check_for_injections([shoe_id])
 
         if injection_exists == True:
             return HttpResponse("Unauthorized query!")
 
         db_access = connect_to_db()
-        interest_insert = {"shoe_id": shoe_id, "username": username}
-        db_access.Interest.insert_one(interest_insert)
 
-    return HttpResponse("Success")
+        search_critera = {"shoe_id": shoe_id}
 
+        search_results = db_access.Interest.find(search_critera)
 
-@api_view(["GET"])
-def get_interested_by_shoe_id():
-    a = 2
+        return_val = []
+        for result in search_results:
+            result_dict = {}
+            for key in result.keys():
+                result_dict[key] = str(result[key])
+            return_val.append(result_dict)
+
+        return JsonResponse(return_val, safe=False)
 
 
 @api_view(["PATCH"])

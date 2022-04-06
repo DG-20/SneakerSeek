@@ -31,7 +31,7 @@ urlpatterns = [
         api.get_shoes_by_username,
     ),
     path(
-        "interested_in/<str:shoe_id>/<str:username>/",
+        "interested_in/",
         api.interested_in,
     ),
     path(

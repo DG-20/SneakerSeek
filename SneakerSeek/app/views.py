@@ -115,6 +115,9 @@ def results(request, pk):
 @login_required
 def product(request, pk):
     if request.method != "POST":
+        url = f"{sneakerseek_url}get_interested_by_shoe_id/{pk}/"
+        json_return = requests.get(url).json()
+
         buyers = [
             {
                 "username": "CurtisS",
@@ -144,9 +147,13 @@ def product(request, pk):
         email = request.POST["email"]
         product_id = request.POST["product_id"]
 
-        url = f"{sneakerseek_url}interested_in/{product_id}/{request.user.username}/"
-        http_return = requests.get(url)
-        print(http_return)
+        post_data = {"shoe_id": product_id, "username": request.user.username}
+        json_product = json.dumps(post_data)
+        response = requests.post(
+            f"{sneakerseek_url}interested_in/",
+            data=json_product,
+            headers={"Content-type": "application/json", "Accept": "application/json"},
+        )
         return redirect("search_view")
 
 
