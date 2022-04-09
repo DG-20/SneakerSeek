@@ -96,17 +96,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto" style="font-family: 'Sora', sans-serif">
-          <li class="nav-item active">
-            <a class="nav-link" href="../search_view"
+          {% if user.is_superuser == False %}
+          <li class="nav-item">
+            <a class="nav-link active" href="../search_view"
               >Search <span class="sr-only">(current)</span></a
             >
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="../profile">Profile</a>
           </li>
+          {% if user.is_superuser == False %}
           <li class="nav-item">
             <a class="nav-link" href="../sell_shoe">Sell a Shoe</a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="../my_shoes">My Shoes</a>
           </li>
@@ -121,6 +125,7 @@
         </span>
       </div>
     </nav>
+    {% if empty == False %}
     <div class="container" style="padding: 3%">
       <div
         style="
@@ -202,6 +207,22 @@
         </table>
       </div>
     </div>
+    {% else %}
+    <div class="container" style="padding: 3%">
+      <div
+        style="
+          text-align: center;
+          font-size: calc(100% + 2vw + 1vh);
+          font-family: 'Sora', sans-serif;
+          color: rgb(54, 54, 54);
+        "
+        class="display-4"
+      >
+        No shoes matching your search criteria! Try
+        <a href="../search_view">again!</a>
+      </div>
+    </div>
+    {% endif %}
     <br />
   </body>
 </html>

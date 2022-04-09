@@ -70,6 +70,8 @@ def register(request):
 
 @login_required
 def search_view(request):
+    if request.user.is_superuser == True:
+        return redirect("profile")
     if request.method != "POST":
         url = f"{sneakerseek_url}get_all_cities/"
         json_string_return = requests.get(url).json()
@@ -95,6 +97,8 @@ def search_view(request):
 
 @login_required
 def results(request, pk):
+    if request.user.is_superuser == True:
+        return redirect("profile")
     if request.method != "POST":
         list_params = pk.split(",")
         search = {}
@@ -103,9 +107,13 @@ def results(request, pk):
 
         url = f"{sneakerseek_url}get_shoes_by_params/{search['brand']}/{search['gender']}/{search['type']}/{search['size']}/{search['condition']}/{search['max_price']}/{search['city']}/{search['quadrant']}/"
         json_return = requests.get(url).json()
-
-        shoes = convert_to_shoe(json_return)
-        return render(request, "results.html", {"shoes": shoes})
+        if len(json_return) > 0:
+            shoes = convert_to_shoe(json_return)
+            empty = False
+        else:
+            shoes = None
+            empty = True
+        return render(request, "results.html", {"shoes": shoes, "empty": empty})
 
     else:
         id = request.POST["id"]
@@ -159,6 +167,8 @@ def product(request, pk):
 
 @login_required
 def sell_shoe(request):
+    if request.user.is_superuser == True:
+        return redirect("profile")
     if request.method != "POST":
         return render(request, "sell_shoe.html")
     else:
@@ -235,14 +245,18 @@ def my_shoes(request):
     if request.user.is_superuser == False:
         url = f"{sneakerseek_url}get_shoes_by_username/{request.user.username}/"
         json_return = requests.get(url).json()
-
-        shoes = convert_to_shoe(json_return)
+        if len(json_return) > 0:
+            shoes = convert_to_shoe(json_return)
+            empty = False
+        else:
+            shoes = None
+            empty = True
     else:
         url = f"{sneakerseek_url}get_all_shoes/"
         json_return = requests.get(url).json()
 
         shoes = convert_to_shoe(json_return)
-    return render(request, "my_shoes.html", {"products": shoes})
+    return render(request, "my_shoes.html", {"products": shoes, "empty": empty})
 
 
 @login_required
@@ -265,7 +279,10 @@ def manage_users(request):
 
 @login_required
 def edit_shoe(request, pk):
-    product = sample_data()[0]
+    url = f"{sneakerseek_url}get_shoe_by_id/{pk}/"
+    json_return = requests.get(url).json()
+
+    product = convert_to_shoe(json_return)[0]
     Brands = [
         "Air Jordan",
         "Nike",

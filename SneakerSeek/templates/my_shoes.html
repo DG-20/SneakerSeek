@@ -97,17 +97,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto" style="font-family: 'Sora', sans-serif">
+          {% if user.is_superuser == False %}
           <li class="nav-item">
             <a class="nav-link" href="../search_view"
               >Search <span class="sr-only">(current)</span></a
             >
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="../profile">Profile</a>
           </li>
+          {% if user.is_superuser == False %}
           <li class="nav-item">
             <a class="nav-link" href="../sell_shoe">Sell a Shoe</a>
           </li>
+          {% endif %}
           <li class="nav-item active">
             <a class="nav-link" href="../my_shoes">My Shoes</a>
           </li>
@@ -126,6 +130,7 @@
     <div class="container">
       <h1 class="my-4">My Shoes:</h1>
 
+      {% if empty == False %}
       <div class="row">
         {% for product in products %}
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex align-items-stretch">
@@ -175,7 +180,7 @@
                 </button>
               </a>
 
-              <form action="my_shoes" method="POST" style="padding-top: 7px;">
+              <form action="my_shoes" method="POST" style="padding-top: 7px">
                 {% csrf_token %}
                 <input
                   type="submit"
@@ -188,6 +193,20 @@
         </div>
         {% endfor %}
       </div>
+      {% else %}
+      <p
+        style="
+          text-align: center;
+          font-family: 'Sora', sans-serif;
+          font-size: calc(100% + 1vw + 1vh);
+          color: rgb(54, 54, 54);
+        "
+        class="text-large"
+      >
+        You have not yet listed a shoe!<br />If you would like to do so, please
+        click <a href="../sell_shoe">here.</a>
+      </p>
+      {% endif %}
     </div>
   </body>
 </html>

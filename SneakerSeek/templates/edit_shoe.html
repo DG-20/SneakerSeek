@@ -97,17 +97,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto" style="font-family: 'Sora', sans-serif">
+          {% if user.is_superuser == False %}
           <li class="nav-item">
             <a class="nav-link" href="../search_view"
               >Search <span class="sr-only">(current)</span></a
             >
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href="../profile">Profile</a>
           </li>
+          {% if user.is_superuser == False %}
           <li class="nav-item">
             <a class="nav-link" href="../sell_shoe">Sell a Shoe</a>
           </li>
+          {% endif %}
           <li class="nav-item active">
             <a class="nav-link" href="../my_shoes">My Shoes</a>
           </li>
@@ -155,7 +159,7 @@
                     class="d-flex flex-column align-items-center text-center"
                   >
                     <img
-                      src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/6f950390-c74c-41dd-90c6-9fae9c6adbdf/air-force-1-high-07-lx-mens-shoes-wTttNP.png"
+                      src="{{shoe.image_url}}"
                       alt="user"
                       width="200"
                       style="border-radius: 25px;"
