@@ -41,7 +41,7 @@ urlpatterns = [
     path("delete_shoe/<str:shoe_id>/", api.delete_shoe),
     path("get_all_shoes/", api.get_all_shoes),
     path(
-        "upload_shoe/<str:brand>/<str:size>/<str:type>/<str:name>/<str:price>/<str:gender>/<str:year>/<str:condition>/<str:city>/<str:quadrant>/<str:image_url>/<str:seller_username>/",
+        "upload_shoe/",
         api.upload_shoe,
     ),
     path(

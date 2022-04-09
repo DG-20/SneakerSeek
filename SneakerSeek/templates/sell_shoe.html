@@ -135,10 +135,11 @@
         <br />
         <br />
         <form
-          action="settings_view"
+          action="sell_shoe"
           method="POST"
           style="padding-top: 0%; background-color: none; margin: auto"
         >
+          {% csrf_token %}
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3" width="50" style="border-radius: 25px">
               <div
@@ -217,13 +218,13 @@
                     </div>
                     <div class="form-group">
                       <select name="brand" id="Brand" class="custom-select">
-                        <option value="Air_Jordan" selected>Air Jordan</option>
+                        <option value="Air Jordan" selected>Air Jordan</option>
                         <option value="Nike">Nike</option>
                         <option value="Adidas">Adidas</option>
-                        <option value="Under_Armour">Under Armour</option>
-                        <option value="New_Balance">New Balance</option>
+                        <option value="Under Armour">Under Armour</option>
+                        <option value="New Balance">New Balance</option>
                         <option value="Converse">Converse</option>
-                        <option value="Common_Projects">Common Projects</option>
+                        <option value="Common Projects">Common Projects</option>
                         <option value="Puma">Puma</option>
                         <option value="Vans">Vans</option>
                         <option value="Reebok">Reebok</option>
@@ -314,7 +315,7 @@
                       <h6 class="mb-0">Gender</h6>
                     </div>
                     <div class="form-group">
-                      <select name="price" id="Price" class="custom-select">
+                      <select name="gender" id="Gender" class="custom-select">
                         <option value="Unisex" selected>Unisex</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -326,7 +327,7 @@
                       <h6 class="mb-0">Year Manufactured</h6>
                     </div>
                     <div class="form-group">
-                      <select name="type" id="Type" class="custom-select">
+                      <select name="year" id="Year" class="custom-select">
                         <option value="1990" selected>1990</option>
                         <option value="1991">1991</option>
                         <option value="1992">1992</option>
@@ -375,8 +376,8 @@
                         class="custom-select"
                       >
                         <option value="Deadstock" selected>Deadstock</option>
-                        <option value="Rarely_Used">Rarely Used</option>
-                        <option value="Gently_Used">Gently Used</option>
+                        <option value="Rarely Used">Rarely Used</option>
+                        <option value="Gently Used">Gently Used</option>
                         <option value="Worn">Worn</option>
                         <option value="Beaters">Heavily Worn</option>
                       </select>
@@ -390,7 +391,7 @@
                     <div class="form-group">
                       <input
                         type="text"
-                        name="NewLName"
+                        name="city"
                         placeholder="City"
                         class="form-control"
                         required

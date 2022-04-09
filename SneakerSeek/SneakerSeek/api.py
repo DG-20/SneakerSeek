@@ -198,8 +198,11 @@ def get_all_shoes(request):
 
 
 @api_view(["POST"])
-def upload_shoe():
-    a = 2
+def upload_shoe(request):
+    if request.method == "POST":
+        db_access = connect_to_db()
+        db_access.Shoe.insert_one(request.data)
+        return HttpResponse("Success")
 
 
 @api_view(["PATCH"])

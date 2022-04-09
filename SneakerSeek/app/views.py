@@ -171,7 +171,41 @@ def sell_shoe(request):
     if request.method != "POST":
         return render(request, "sell_shoe.html")
     else:
-        b = 2
+        brand = request.POST["brand"]
+        size = request.POST["size"]
+        type = request.POST["type"]
+        brand = request.POST["brand"]
+        name = request.POST["title"]
+        price = request.POST["price"]
+        gender = request.POST["gender"]
+        year = request.POST["year"]
+        condition = request.POST["condition"]
+        city = request.POST["city"]
+        quadrant = request.POST["quadrant"]
+
+        post_data = {
+            "brand": brand,
+            "size": size,
+            "type": type,
+            "title": name,
+            "price": price,
+            "gender": gender,
+            "year": year,
+            "condition": condition,
+            "city": city,
+            "quadrant": quadrant,
+            "seller": request.user.username,
+            "image": "https://img.ssensemedia.com/images/221451M237012_1/gucci-undefined.jpg",
+        }
+
+        json_product = json.dumps(post_data)
+
+        response = requests.post(
+            f"{sneakerseek_url}upload_shoe/",
+            data=json_product,
+            headers={"Content-type": "application/json", "Accept": "application/json"},
+        )
+        return redirect("search_view")
 
 
 @login_required
