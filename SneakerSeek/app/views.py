@@ -125,21 +125,20 @@ def product(request, pk):
     if request.method != "POST":
         url = f"{sneakerseek_url}get_interested_by_shoe_id/{pk}/"
         json_return = requests.get(url).json()
+        buyers = []
 
-        buyers = [
-            {
-                "username": "CurtisS",
-                "f_name": "Curtis",
-                "l_name": "S",
-                "email": "curtis@gmail.com",
-            },
-            {
-                "username": "LiamP",
-                "f_name": "Liam",
-                "l_name": "P",
-                "email": "liam@gmail.com",
-            },
-        ]
+        for ret in json_return:
+            username_val = ret["username"]
+            user_interested = User.objects.get(username=username_val)
+            buyers.append(
+                {
+                    "username": user_interested.username,
+                    "f_name": user_interested.first_name,
+                    "l_name": user_interested.last_name,
+                    "email": user_interested.email,
+                }
+            )
+
         url = f"{sneakerseek_url}get_shoe_by_id/{pk}/"
         json_return = requests.get(url).json()
 
@@ -254,8 +253,12 @@ def my_shoes(request):
     else:
         url = f"{sneakerseek_url}get_all_shoes/"
         json_return = requests.get(url).json()
-
-        shoes = convert_to_shoe(json_return)
+        if len(json_return) > 0:
+            shoes = convert_to_shoe(json_return)
+            empty = False
+        else:
+            shoes = None
+            empty = True
     return render(request, "my_shoes.html", {"products": shoes, "empty": empty})
 
 

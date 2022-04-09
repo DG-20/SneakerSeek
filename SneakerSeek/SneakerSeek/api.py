@@ -167,6 +167,8 @@ def get_interested_by_shoe_id(request, shoe_id):
                 result_dict[key] = str(result[key])
             return_val.append(result_dict)
 
+        print(return_val)
+
         return JsonResponse(return_val, safe=False)
 
 

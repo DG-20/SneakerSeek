@@ -110,11 +110,15 @@
           <li class="nav-item">
             <a class="nav-link" href="../sell_shoe">Sell a Shoe</a>
           </li>
-          {% endif %}
+          {% endif %} {% if user.is_superuser == False %}
           <li class="nav-item">
             <a class="nav-link" href="../my_shoes">My Shoes</a>
           </li>
-          {% if user.is_superuser == True %}
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="../my_shoes">Manage Shoes</a>
+          </li>
+          {% endif %} {% if user.is_superuser == True %}
           <li class="nav-item">
             <a class="nav-link" href="../manage_users">Manage Users</a>
           </li>
