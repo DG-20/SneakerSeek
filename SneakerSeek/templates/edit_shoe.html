@@ -111,8 +111,7 @@
           <li class="nav-item">
             <a class="nav-link" href="../sell_shoe">Sell a Shoe</a>
           </li>
-          {% endif %}
-          {% if user.is_superuser == False %}
+          {% endif %} {% if user.is_superuser == False %}
           <li class="nav-item active">
             <a class="nav-link" href="../my_shoes">My Shoes</a>
           </li>
@@ -120,8 +119,7 @@
           <li class="nav-item active">
             <a class="nav-link" href="../my_shoes">Manage Shoes</a>
           </li>
-          {% endif %}
-          {% if user.is_superuser == True %}
+          {% endif %} {% if user.is_superuser == True %}
           <li class="nav-item">
             <a class="nav-link" href="../manage_users">Manage Users</a>
           </li>
@@ -137,10 +135,11 @@
         <br />
         <br />
         <form
-          action="settings_view"
+          action="edit_shoe"
           method="POST"
           style="padding-top: 0%; background-color: none; margin: auto"
         >
+          {% csrf_token %}
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3" width="50" style="border-radius: 25px">
               <div
@@ -168,10 +167,13 @@
                       src="{{shoe.image_url}}"
                       alt="user"
                       width="200"
-                      style="border-radius: 25px;"
+                      style="border-radius: 25px"
                     />
                     <div class="mt-3">
-                      <span style="color: white; font-family: 'Sora', sans-serif;">Shoe Listing Image</span>
+                      <span
+                        style="color: white; font-family: 'Sora', sans-serif"
+                        >Shoe Listing Image</span
+                      >
                     </div>
                   </div>
                 </div>
@@ -196,179 +198,229 @@
                   border: none;
                 "
               >
-          <div class="card-body" width="150">
-            <h3 class="text-center" style="padding-bottom: 15px; font-family: 'Sora', sans-serif;">Edit Listing</h3>
-            <hr>
-            <div class="row">
-              <div class="col-sm-4">
-                <h6 class="mb-0" style="font-family: 'Sora', sans-serif;">Brand</h6>
-              </div>
-              <div class="form-group">
-                <select name="brand" id="Brand" class="custom-select">
-                  {% for brand in Brands %} {% if brand != shoe.brand %}
-                  <option value="{{brand}}">{{brand}}</option>
-                  {% else %}
-                  <option value="{{brand}}" selected>{{brand}}</option>
-                  {% endif %} {% endfor %}
-                </select>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-4">
-                <h6 class="mb-0" style="font-family: 'Sora', sans-serif;">Size</h6>
-              </div>
-              <div class="form-group">
-                <select name="size" id="Size" class="custom-select">
-                  {% for i in range %} {% if i == shoe.size %}
-                  <option value="{{i}}" selected>{{i}}</option>
-                  {% else %}
-                  <option value="{{i}}">{{i}}</option>
-                  {% endif %} {% endfor %}
-                </select>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-4">
-                <h6 class="mb-0" style="font-family: 'Sora', sans-serif;">Type</h6>
-              </div>
-              <div class="form-group">
-                <select name="type" id="Type" class="custom-select">
-                  <option value="Highs" selected>Highs</option>
-                  <option value="Lows">Lows</option>
-                  <option value="Mids">Mids</option>
-                  <option value="Slides">Slides</option>
-                  <option value="Heels">High Heels</option>
-                  <option value="Slippers">Slippers</option>
-                  <option value="Oxfords">Oxfords</option>
-                </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-4">
-                <h6 class="mb-0" style="font-family: 'Sora', sans-serif;">Shoe Name</h6>
-              </div>
-              <div class="form-group">
-                <input
-                  type="text"
-                  name="title"
-                  id="Title"
-                  class="form-control"
-                  placeholder="{{shoe.title}}"
-                  required
-                />
-              </div>
-            </div>
-            <hr />
-            <div class="row">
-              <div class="col-sm-4">
-                <h6 class="mb-0" style="font-family: 'Sora', sans-serif;">Price</h6>
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">$</span>
+                <div class="card-body" width="150">
+                  <p
+                    style="
+                      text-align: center;
+                      text-decoration: underline;
+                      font-family: 'Sora', sans-serif;
+                      font-size: calc(80% + 0.6vw + 0.6vh);
+                      color: rgb(54, 54, 54);
+                    "
+                    class="text-large"
+                  >
+                    Please Enter All Fields With All Updated Values:
+                  </p>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0" style="font-family: 'Sora', sans-serif">
+                        Brand
+                      </h6>
+                    </div>
+                    <div class="form-group">
+                      <select name="brand" id="Brand" class="custom-select">
+                        {% for brand in Brands %} {% if brand != shoe.brand %}
+                        <option value="{{brand}}">{{brand}}</option>
+                        {% else %}
+                        <option value="{{brand}}" selected>{{brand}}</option>
+                        {% endif %} {% endfor %}
+                      </select>
+                    </div>
                   </div>
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0" style="font-family: 'Sora', sans-serif">
+                        Size
+                      </h6>
+                    </div>
+                    <div class="form-group">
+                      <select name="size" id="Size" class="custom-select">
+                        {% for i in range %} {% if i == shoe.size %}
+                        <option value="{{i}}" selected>{{i}}</option>
+                        {% else %}
+                        <option value="{{i}}">{{i}}</option>
+                        {% endif %} {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0" style="font-family: 'Sora', sans-serif">
+                        Type
+                      </h6>
+                    </div>
+                    <div class="form-group">
+                      <select name="type" id="Type" class="custom-select">
+                        <option value="Highs" selected>Highs</option>
+                        <option value="Lows">Lows</option>
+                        <option value="Mids">Mids</option>
+                        <option value="Slides">Slides</option>
+                        <option value="Heels">High Heels</option>
+                        <option value="Slippers">Slippers</option>
+                        <option value="Oxfords">Oxfords</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0" style="font-family: 'Sora', sans-serif">
+                        Shoe Name
+                      </h6>
+                    </div>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        name="title"
+                        id="Title"
+                        class="form-control"
+                        placeholder="{{shoe.title}}"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0" style="font-family: 'Sora', sans-serif">
+                        Price
+                      </h6>
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">$</span>
+                        </div>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="amount"
+                          placeholder="{{shoe.price}}"
+                          name="price"
+                          step="0.01"
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0" style="font-family: 'Sora', sans-serif">
+                        Gender
+                      </h6>
+                    </div>
+                    <div class="form-group">
+                      <select name="gender" id="Gender" class="custom-select">
+                        {% for gend in gender %} {% if gend == shoe.gender %}
+                        <option value="{{gend}}" selected>{{gend}}</option>
+                        {% else %}
+                        <option value="{{gend}}">{{gend}}</option>
+                        {% endif %} {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0" style="font-family: 'Sora', sans-serif">
+                        Year Manufactured
+                      </h6>
+                    </div>
+                    <div class="form-group">
+                      <select name="year" id="Year" class="custom-select">
+                        {% for year in years %} {% if year == shoe.year_manufactured %}
+                        <option value="{{year}}" selected>{{year}}</option>
+                        {% else %}
+                        <option value="{{year}}">{{year}}</option>
+                        {% endif %} {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0" style="font-family: 'Sora', sans-serif">
+                        Condition
+                      </h6>
+                    </div>
+                    <div class="form-group">
+                      <select
+                        name="condition"
+                        id="Condition"
+                        class="custom-select"
+                      >
+                        {% for cond in condition %} {% if cond == shoe.condition %}
+                        <option value="{{cond}}" selected>{{cond}}</option>
+                        {% else %}
+                        <option value="{{cond}}">{{cond}}</option>
+                        {% endif %} {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0" style="font-family: 'Sora', sans-serif">
+                        City
+                      </h6>
+                    </div>
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        name="city"
+                        placeholder="{{shoe.city}}"
+                        class="form-control"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0" style="font-family: 'Sora', sans-serif">
+                        Quadrant
+                      </h6>
+                    </div>
+                    <div class="form-group">
+                      <select
+                        name="quadrant"
+                        id="Quadrant"
+                        class="custom-select"
+                      >
+                        {% for quad in quadrant %} {% if quad == shoe.quadrant %}
+                        <option value="{{quad}}" selected>{{quad}}</option>
+                        {% else %}
+                        <option value="{{quad}}">{{quad}}</option>
+                        {% endif %} {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <input
+                  type="hidden"
+                  name="shoe_id"
+                  value="{{shoe.product_id}}"
+                />
+                <div class="form-group text-center">
                   <input
-                    type="number"
-                    class="form-control"
-                    id="amount"
-                    placeholder="{{shoe.price}}"
-                    name="price"
-                    step="1"
-                    required
+                    type="submit"
+                    value="Update Shoe"
+                    class="btn btn-primary"
+                    style="
+                      border: none;
+                      background-color: rgba(110, 110, 110, 0.829);
+                      font-family: 'Sora', sans-serif;
+                    "
                   />
                 </div>
-              </div>
-            </div>
-            <hr />
-            <div class="row">
-              <div class="col-sm-4">
-                <h6 class="mb-0" style="font-family: 'Sora', sans-serif;">Gender</h6>
-              </div>
-              <div class="form-group">
-                <select name="price" id="Price" class="custom-select">
-                  {% for gend in gender %} {% if gend == shoe.gender %}
-                  <option value="{{gend}}" selected>{{gend}}</option>
-                  {% else %}
-                  <option value="{{gend}}">{{gend}}</option>
-                  {% endif %} {% endfor %}
-                </select>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-4">
-                <h6 class="mb-0" style="font-family: 'Sora', sans-serif;">Year Manufactured</h6>
-              </div>
-              <div class="form-group">
-                <select name="type" id="Type" class="custom-select">
-                  {% for year in years %} {% if year == shoe.year_manufactured %}
-                  <option value="{{year}}" selected>{{year}}</option>
-                  {% else %}
-                  <option value="{{year}}">{{year}}</option>
-                  {% endif %} {% endfor %}
-                </select>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-sm-4">
-                <h6 class="mb-0" style="font-family: 'Sora', sans-serif;">Condition</h6>
-              </div>
-              <div class="form-group">
-                <select name="condition" id="Condition" class="custom-select">
-                  {% for cond in condition %} {% if cond == shoe.condition %}
-                  <option value="{{cond}}" selected>{{cond}}</option>
-                  {% else %}
-                  <option value="{{cond}}">{{cond}}</option>
-                  {% endif %} {% endfor %}
-                </select>
-              </div>
-            </div>
-            <hr />
-            <div class="row">
-              <div class="col-sm-4">
-                <h6 class="mb-0" style="font-family: 'Sora', sans-serif;">City</h6>
-              </div>
-              <div class="form-group">
-                <input
-                  type="text"
-                  name="NewLName"
-                  placeholder="{{shoe.city}}"
-                  class="form-control"
-                  required
-                />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-4">
-                <h6 class="mb-0" style="font-family: 'Sora', sans-serif;">Quadrant</h6>
-              </div>
-              <div class="form-group">
-                <select name="quadrant" id="Quadrant" class="custom-select">
-                  {% for quad in quadrant %} {% if quad == shoe.quadrant %}
-                  <option value="{{quad}}" selected>{{quad}}</option>
-                  {% else %}
-                  <option value="{{quad}}">{{quad}}</option>
-                  {% endif %} {% endfor %}
-                </select>
+                <br />
               </div>
             </div>
           </div>
-          <div class="form-group text-center">
-            <input
-              type="submit"
-              value="Post Listing"
-              class="btn btn-primary"
-              style="border: none; background-color: rgba(110, 110, 110, 0.829); font-family: 'Sora', sans-serif;"
-            />
-          </div>
-          <br>
         </form>
       </div>
-      <br>
+      <br />
     </div>
-    <div></div>
   </body>
 </html>

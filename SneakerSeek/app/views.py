@@ -181,6 +181,7 @@ def sell_shoe(request):
         year = request.POST["year"]
         condition = request.POST["condition"]
         city = request.POST["city"]
+        image_url = request.POST["image_url"]
         quadrant = request.POST["quadrant"]
 
         post_data = {
@@ -195,7 +196,7 @@ def sell_shoe(request):
             "city": city,
             "quadrant": quadrant,
             "seller": request.user.username,
-            "image": "https://img.ssensemedia.com/images/221451M237012_1/gucci-undefined.jpg",
+            "image": image_url,
         }
 
         json_product = json.dumps(post_data)
@@ -275,25 +276,39 @@ def profile(request):
 
 @login_required
 def my_shoes(request):
-    if request.user.is_superuser == False:
-        url = f"{sneakerseek_url}get_shoes_by_username/{request.user.username}/"
-        json_return = requests.get(url).json()
-        if len(json_return) > 0:
-            shoes = convert_to_shoe(json_return)
-            empty = False
+    if request.method != "POST":
+        if request.user.is_superuser == False:
+            url = f"{sneakerseek_url}get_shoes_by_username/{request.user.username}/"
+            json_return = requests.get(url).json()
+            if len(json_return) > 0:
+                shoes = convert_to_shoe(json_return)
+                empty = False
+            else:
+                shoes = None
+                empty = True
         else:
-            shoes = None
-            empty = True
+            url = f"{sneakerseek_url}get_all_shoes/"
+            json_return = requests.get(url).json()
+            if len(json_return) > 0:
+                shoes = convert_to_shoe(json_return)
+                empty = False
+            else:
+                shoes = None
+                empty = True
+        return render(request, "my_shoes.html", {"products": shoes, "empty": empty})
     else:
-        url = f"{sneakerseek_url}get_all_shoes/"
-        json_return = requests.get(url).json()
-        if len(json_return) > 0:
-            shoes = convert_to_shoe(json_return)
-            empty = False
-        else:
-            shoes = None
-            empty = True
-    return render(request, "my_shoes.html", {"products": shoes, "empty": empty})
+        shoe_id_to_delete = request.POST["shoe_id"]
+        print(shoe_id_to_delete)
+        post_data = {"_id": shoe_id_to_delete}
+
+        json_delete = json.dumps(post_data)
+
+        response = requests.post(
+            f"{sneakerseek_url}delete_shoe/",
+            data=json_delete,
+            headers={"Content-type": "application/json", "Accept": "application/json"},
+        )
+        return redirect("my_shoes")
 
 
 @login_required
@@ -316,45 +331,83 @@ def manage_users(request):
 
 @login_required
 def edit_shoe(request, pk):
-    url = f"{sneakerseek_url}get_shoe_by_id/{pk}/"
-    json_return = requests.get(url).json()
+    if request.method != "POST":
+        url = f"{sneakerseek_url}get_shoe_by_id/{pk}/"
+        json_return = requests.get(url).json()
 
-    product = convert_to_shoe(json_return)[0]
-    Brands = [
-        "Air Jordan",
-        "Nike",
-        "Adidas",
-        "Under Armour",
-        "New Balance",
-        "Converse",
-        "Common Projects",
-        "Puma",
-        "Vans",
-        "Reebok",
-        "Balenciaga",
-        "Asics",
-        "Gucci",
-        "Sketchers",
-        "Fila",
-    ]
-    Type = ["Highs", "Lows", "Mids", "Slides", "High Heels", "Slippers", "Oxfords"]
-    Gender = ["Male", "Female", "Unisex"]
-    Condition = ["Deadstock", "Rarely Used", "Gently Used", "Worn", "Heavily Worn"]
-    Quadrant = ["SW", "SE", "NE", "NW"]
-    return render(
-        request,
-        "edit_shoe.html",
-        {
-            "shoe": product,
-            "Brands": Brands,
-            "range": range(6, 15),
-            "type": Type,
-            "gender": Gender,
-            "condition": Condition,
-            "quadrant": Quadrant,
-            "years": range(1990, 2023),
-        },
-    )
+        product = convert_to_shoe(json_return)[0]
+        Brands = [
+            "Air Jordan",
+            "Nike",
+            "Adidas",
+            "Under Armour",
+            "New Balance",
+            "Converse",
+            "Common Projects",
+            "Puma",
+            "Vans",
+            "Reebok",
+            "Balenciaga",
+            "Asics",
+            "Gucci",
+            "Sketchers",
+            "Fila",
+        ]
+        Type = ["Highs", "Lows", "Mids", "Slides", "High Heels", "Slippers", "Oxfords"]
+        Gender = ["Male", "Female", "Unisex"]
+        Condition = ["Deadstock", "Rarely Used", "Gently Used", "Worn", "Heavily Worn"]
+        Quadrant = ["SW", "SE", "NE", "NW"]
+        return render(
+            request,
+            "edit_shoe.html",
+            {
+                "shoe": product,
+                "Brands": Brands,
+                "range": range(6, 15),
+                "type": Type,
+                "gender": Gender,
+                "condition": Condition,
+                "quadrant": Quadrant,
+                "years": range(1990, 2023),
+            },
+        )
+    else:
+        shoe_id_to_update = request.POST["shoe_id"]
+        brand_updated = request.POST["brand"]
+        size_updated = request.POST["size"]
+        type_updated = request.POST["type"]
+        brand_updated = request.POST["brand"]
+        name_updated = request.POST["title"]
+        price_updated = request.POST["price"]
+        gender_updated = request.POST["gender"]
+        year_updated = request.POST["year"]
+        condition_updated = request.POST["condition"]
+        city_updated = request.POST["city"]
+        quadrant_updated = request.POST["quadrant"]
+
+        post_data = {
+            "_id": shoe_id_to_update,
+            "brand_updated": brand_updated,
+            "size_updated": size_updated,
+            "type_updated": type_updated,
+            "title_updated": name_updated,
+            "price_updated": price_updated,
+            "gender_updated": gender_updated,
+            "year_updated": year_updated,
+            "condition_updated": condition_updated,
+            "city_updated": city_updated,
+            "quadrant_updated": quadrant_updated,
+        }
+
+        json_product_updated = json.dumps(post_data)
+
+        response = requests.post(
+            f"{sneakerseek_url}update_shoe/",
+            data=json_product_updated,
+            headers={"Content-type": "application/json", "Accept": "application/json"},
+        )
+
+        return redirect("my_shoes")
 
 
 def sample_data():

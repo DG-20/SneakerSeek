@@ -39,11 +39,6 @@
     />
     <title>Profile</title>
     <style>
-      html {
-        height: 100%;
-      }
-    </style>
-    <style>
       body::-webkit-scrollbar {
         width: 15px;
         background-color: transparent;
@@ -75,9 +70,7 @@
         rgba(255, 255, 255, 0.192),
         rgba(32, 32, 32, 0.822)
       );
-      height: 80%;
-      margin: 0;
-      background-repeat: no-repeat;
+      background-attachment: fixed;
     "
   >
     <nav
@@ -137,6 +130,19 @@
       </div>
     </nav>
     <div class="container py-5 h-100">
+      <p
+        style="
+          text-align: center;
+          text-decoration: underline;
+          font-family: 'Sora', sans-serif;
+          font-size: calc(100% + 1vw + 1vh);
+          color: rgb(54, 54, 54);
+        "
+        class="text-large"
+      >
+        Your Profile
+      </p>
+      <hr />
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-lg-6 mb-4 mb-lg-0">
           <div

@@ -132,7 +132,35 @@
     </nav>
 
     <div class="container">
-      <h1 class="my-4">My Shoes:</h1>
+      <br />
+      {% if user.is_superuser == False %}
+      <p
+        style="
+          text-align: center;
+          text-decoration: underline;
+          font-family: 'Sora', sans-serif;
+          font-size: calc(100% + 1vw + 1vh);
+          color: rgb(54, 54, 54);
+        "
+        class="text-large"
+      >
+        My Shoes
+      </p>
+      {% else %}
+      <p
+        style="
+          text-align: center;
+          text-decoration: underline;
+          font-family: 'Sora', sans-serif;
+          font-size: calc(100% + 1vw + 1vh);
+          color: rgb(54, 54, 54);
+        "
+        class="text-large"
+      >
+        All Shoes
+      </p>
+      {% endif %}
+      <hr />
 
       {% if empty == False %}
       <div class="row">
@@ -171,6 +199,8 @@
               <div class="row justify-content-center">
                 <p class="card-text">List Price: ${{product.price}}</p>
               </div>
+              <br />
+              <br />
               <a href="{% url 'edit_shoe' pk=product.product_id %}">
                 <button
                   type="button"
@@ -186,6 +216,11 @@
 
               <form action="my_shoes" method="POST" style="padding-top: 7px">
                 {% csrf_token %}
+                <input
+                  type="hidden"
+                  name="shoe_id"
+                  value="{{product.product_id}}"
+                />
                 <input
                   type="submit"
                   class="btn btn-danger btn-sm btn-block form-control"

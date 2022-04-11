@@ -1,4 +1,5 @@
 from re import search
+from turtle import update
 from pymongo import MongoClient
 from rest_framework.decorators import api_view
 from django.http import JsonResponse, HttpResponse
@@ -140,8 +141,13 @@ def get_shoes_by_username(request, username):
 def interested_in(request):
     if request.method == "POST":
         db_access = connect_to_db()
+        already_interested = db_access.Interest.find(
+            {"username": request.data["username"]}
+        )
+        if already_interested.count() > 0:
+            return HttpResponse("You already expressed your interest!")
         db_access.Interest.insert_one(request.data)
-        return HttpResponse("Success")
+        return HttpResponse("Success!")
 
 
 @api_view(["GET"])
@@ -167,14 +173,26 @@ def get_interested_by_shoe_id(request, shoe_id):
                 result_dict[key] = str(result[key])
             return_val.append(result_dict)
 
-        print(return_val)
-
         return JsonResponse(return_val, safe=False)
 
 
-@api_view(["PATCH"])
-def delete_shoe():
-    a = 2
+@api_view(["POST"])
+def delete_shoe(request):
+    if request.method == "POST":
+        db_access = connect_to_db()
+
+        shoe_to_delete = request.data
+        shoe_to_delete["_id"] = ObjectId(shoe_to_delete["_id"])
+
+        search_results = db_access.Shoe.find(shoe_to_delete)
+        if search_results.count() == 0:
+            return HttpResponse("The shoe you are trying to delete does not exist!")
+
+        try:
+            db_access.Shoe.delete_one(shoe_to_delete)
+            return HttpResponse("Success")
+        except:
+            return HttpResponse("Unable to delete this listing!")
 
 
 @api_view(["GET"])
@@ -205,6 +223,33 @@ def upload_shoe(request):
         return HttpResponse("Success")
 
 
-@api_view(["PATCH"])
-def update_shoe():
-    a = 2
+@api_view(["POST"])
+def update_shoe(request):
+    if request.method == "POST":
+        db_access = connect_to_db()
+
+        updated_shoe_vals = request.data
+        updated_shoe_vals["_id"] = ObjectId(updated_shoe_vals["_id"])
+
+        search_results = db_access.Shoe.find({"_id": updated_shoe_vals["_id"]})
+        if search_results.count() == 0:
+            return HttpResponse("The shoe you are trying to update does not exist!")
+
+        db_access.Shoe.update_one(
+            {"_id": updated_shoe_vals["_id"]},
+            {
+                "$set": {
+                    "brand": updated_shoe_vals["brand_updated"],
+                    "size": updated_shoe_vals["size_updated"],
+                    "type": updated_shoe_vals["type_updated"],
+                    "title": updated_shoe_vals["title_updated"],
+                    "price": updated_shoe_vals["price_updated"],
+                    "gender": updated_shoe_vals["gender_updated"],
+                    "year": updated_shoe_vals["year_updated"],
+                    "condition": updated_shoe_vals["condition_updated"],
+                    "city": updated_shoe_vals["city_updated"],
+                    "quadrant": updated_shoe_vals["quadrant_updated"],
+                }
+            },
+        )
+        return HttpResponse("Success!")
