@@ -184,12 +184,28 @@ def sell_shoe(request):
         image_url = request.POST["image_url"]
         quadrant = request.POST["quadrant"]
 
-        post_data = {
+        if price != "more":
+            post_data = {
+                "brand": brand,
+                "size": size,
+                "type": type,
+                "title": name,
+                "price": price,
+                "gender": gender,
+                "year": year,
+                "condition": condition,
+                "city": city,
+                "quadrant": quadrant,
+                "seller": request.user.username,
+                "image": image_url,
+            }
+        else:
+            post_data = {
             "brand": brand,
             "size": size,
             "type": type,
             "title": name,
-            "price": price,
+            "price": float(price),
             "gender": gender,
             "year": year,
             "condition": condition,

@@ -59,10 +59,10 @@ def get_shoes_by_params(
             search_criteria["size"] = size
         if condition != "all":
             search_criteria["condition"] = condition
-        if max_price != "all":
-            search_criteria["price"] = {"$lte": max_price}
+        if max_price != "all" and max_price != "more":
+            search_criteria["price"] = {"$lte": float(max_price)}
         if max_price == "more":
-            search_criteria["price"] = {"$gt": "500"}
+            search_criteria["price"] = {"$gt": float(500)}
         if city != "all":
             search_criteria["city"] = city
         if quadrant != "all":
