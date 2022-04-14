@@ -344,8 +344,7 @@
                     </div>
                     <div class="form-group">
                       <select name="year" id="Year" class="custom-select">
-                        {% for year in years %} {% if year ==
-                        shoe.year_manufactured %}
+                        {% for year in years %} {% if year == shoe.year_manufactured %}
                         <option value="{{year}}" selected>{{year}}</option>
                         {% else %}
                         <option value="{{year}}">{{year}}</option>
@@ -366,8 +365,7 @@
                         id="Condition"
                         class="custom-select"
                       >
-                        {% for cond in condition %} {% if cond == shoe.condition
-                        %}
+                        {% for cond in condition %} {% if cond == shoe.condition %}
                         <option value="{{cond}}" selected>{{cond}}</option>
                         {% else %}
                         <option value="{{cond}}">{{cond}}</option>
@@ -404,8 +402,7 @@
                         id="Quadrant"
                         class="custom-select"
                       >
-                        {% for quad in quadrant %} {% if quad == shoe.quadrant
-                        %}
+                        {% for quad in quadrant %} {% if quad == shoe.quadrant %}
                         <option value="{{quad}}" selected>{{quad}}</option>
                         {% else %}
                         <option value="{{quad}}">{{quad}}</option>

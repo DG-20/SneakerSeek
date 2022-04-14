@@ -321,10 +321,13 @@ def my_shoes(request):
 
         json_delete = json.dumps(post_data)
 
-        response = requests.post(
+        response = requests.delete(
             f"{sneakerseek_url}delete_shoe/",
             data=json_delete,
-            headers={"Content-type": "application/json", "Accept": "application/json"},
+            headers={
+                "Content-type": "application/json",
+                "Accept": "application/json",
+            },
         )
         return redirect("my_shoes")
 
@@ -354,7 +357,7 @@ def manage_users(request):
 
             json_delete = json.dumps(post_data)
 
-            response = requests.post(
+            response = requests.delete(
                 f"{sneakerseek_url}delete_shoe/",
                 data=json_delete,
                 headers={
@@ -439,7 +442,7 @@ def edit_shoe(request, pk):
 
         json_product_updated = json.dumps(post_data)
 
-        response = requests.post(
+        response = requests.put(
             f"{sneakerseek_url}update_shoe/",
             data=json_product_updated,
             headers={"Content-type": "application/json", "Accept": "application/json"},

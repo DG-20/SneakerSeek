@@ -176,9 +176,9 @@ def get_interested_by_shoe_id(request, shoe_id):
         return JsonResponse(return_val, safe=False)
 
 
-@api_view(["POST"])
+@api_view(["DELETE"])
 def delete_shoe(request):
-    if request.method == "POST":
+    if request.method == "DELETE":
         db_access = connect_to_db()
 
         shoe_to_delete = request.data
@@ -224,9 +224,9 @@ def upload_shoe(request):
         return HttpResponse("Success")
 
 
-@api_view(["POST"])
+@api_view(["PUT"])
 def update_shoe(request):
-    if request.method == "POST":
+    if request.method == "PUT":
         db_access = connect_to_db()
 
         updated_shoe_vals = request.data
