@@ -240,6 +240,7 @@ def update_shoe(request):
             {
                 "$set": {
                     "brand": updated_shoe_vals["brand_updated"],
+                    "collection": updated_shoe_vals["collection_updated"],
                     "size": updated_shoe_vals["size_updated"],
                     "type": updated_shoe_vals["type_updated"],
                     "title": updated_shoe_vals["title_updated"],

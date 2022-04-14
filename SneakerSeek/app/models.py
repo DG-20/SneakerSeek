@@ -3,6 +3,7 @@ from django.db import models
 
 class Shoe(models.Model):
     brand = models.CharField(max_length=100)
+    collection = models.CharField(max_length=100)
     size = models.PositiveIntegerField()
     shoe_type = models.CharField(max_length=50)
     price = models.FloatField()

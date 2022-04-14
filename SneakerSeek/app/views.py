@@ -1,3 +1,4 @@
+import collections
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
@@ -175,6 +176,7 @@ def sell_shoe(request):
         size = request.POST["size"]
         type = request.POST["type"]
         brand = request.POST["brand"]
+        collection = request.POST["collection"]
         name = request.POST["title"]
         price = request.POST["price"]
         gender = request.POST["gender"]
@@ -187,6 +189,7 @@ def sell_shoe(request):
         if price != "more":
             post_data = {
                 "brand": brand,
+                "collection": collection,
                 "size": size,
                 "type": type,
                 "title": name,
@@ -201,19 +204,20 @@ def sell_shoe(request):
             }
         else:
             post_data = {
-            "brand": brand,
-            "size": size,
-            "type": type,
-            "title": name,
-            "price": float(price),
-            "gender": gender,
-            "year": year,
-            "condition": condition,
-            "city": city,
-            "quadrant": quadrant,
-            "seller": request.user.username,
-            "image": image_url,
-        }
+                "brand": brand,
+                "collection": collection,
+                "size": size,
+                "type": type,
+                "title": name,
+                "price": float(price),
+                "gender": gender,
+                "year": year,
+                "condition": condition,
+                "city": city,
+                "quadrant": quadrant,
+                "seller": request.user.username,
+                "image": image_url,
+            }
 
         json_product = json.dumps(post_data)
 
@@ -393,6 +397,7 @@ def edit_shoe(request, pk):
         size_updated = request.POST["size"]
         type_updated = request.POST["type"]
         brand_updated = request.POST["brand"]
+        collection_updated = request.POST["collection"]
         name_updated = request.POST["title"]
         price_updated = request.POST["price"]
         gender_updated = request.POST["gender"]
@@ -404,6 +409,7 @@ def edit_shoe(request, pk):
         post_data = {
             "_id": shoe_id_to_update,
             "brand_updated": brand_updated,
+            "collection_updated": collection_updated,
             "size_updated": size_updated,
             "type_updated": type_updated,
             "title_updated": name_updated,
@@ -426,109 +432,13 @@ def edit_shoe(request, pk):
         return redirect("my_shoes")
 
 
-def sample_data():
-    shoe1 = Shoe(
-        brand="Nike",
-        size=10,
-        shoe_type="Highs",
-        price=189.99,
-        gender="Male",
-        year_manufactured=2001,
-        condition="Deadstock",
-        quadrant="SW",
-        seller="Div",
-        image_url="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/6f950390-c74c-41dd-90c6-9fae9c6adbdf/air-force-1-high-07-lx-mens-shoes-wTttNP.png",
-        title="Nike Air Force 1 High Brand New",
-        product_id="12341234",
-        city="Calgary",
-    )
-    shoe2 = Shoe(
-        brand="Adidas",
-        size=7,
-        shoe_type="Mids",
-        price=99.99,
-        gender="Female",
-        year_manufactured=2021,
-        condition="Heavily Worn",
-        quadrant="NE",
-        seller="Curtis",
-        image_url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQrjAdYWImx34u-AHy1X6hVuseZ_sLBzj3dw&usqp=CAU",
-        title="Adidas Mids Used",
-        product_id="23452345",
-        city="Calgary",
-    )
-    shoe3 = Shoe(
-        brand="Air Jordan",
-        size=13,
-        shoe_type="Highs",
-        price=1100.00,
-        gender="Male",
-        year_manufactured=1998,
-        condition="Deadstock",
-        quadrant="SE",
-        seller="Liam",
-        image_url="https://process.fs.grailed.com/AJdAgnqCST4iPtnUxiGtTz/cache=expiry:max/rotate=deg:exif/resize=width:2400,fit:crop/output=quality:70/compress/https://process.fs.grailed.com/z0qM3P5pR3a9viT9MCon",
-        title="Jordan 1 High Bred Brand New",
-        product_id="34563456",
-        city="Chicago",
-    )
-    shoe4 = Shoe(
-        brand="New Balance",
-        size=8,
-        shoe_type="Lows",
-        price=80.00,
-        gender="Male",
-        year_manufactured=2009,
-        condition="Rarely Used",
-        quadrant="NW",
-        seller="Curtis",
-        image_url="https://nb.scene7.com/is/image/NB/bb550pb1_nb_02_i?$dw_detail_gallery$",
-        title="New Balance S550 Rarely Used",
-        product_id="45674567",
-        city="Calgary",
-    )
-    shoe5 = Shoe(
-        brand="Vans",
-        size=11,
-        shoe_type="Lows",
-        price=110.00,
-        gender="Male",
-        year_manufactured=2018,
-        condition="Deadstock",
-        quadrant="SW",
-        seller="Div",
-        image_url="https://images.vans.com/is/image/Vans/D3HY28-HERO?$583x583$",
-        title="Vans Old Skool Skate Shoe Brand New",
-        product_id="56785678",
-        city="Calgary",
-    )
-    shoe6 = Shoe(
-        brand="Air Jordan",
-        size=12,
-        shoe_type="Highs",
-        price=999.00,
-        gender="Male",
-        year_manufactured=1998,
-        condition="Rarely Used",
-        quadrant="NE",
-        seller="Liam",
-        image_url="https://images.solecollector.com/complex/images/c_crop,h_2921,w_5193,x_772,y_440/f_auto,fl_lossy,q_auto,w_1200/qsdrtn3exos5qn5zkvg8/air-jordan-1-chicago.jpg",
-        title="Jordan 1 High Chicago Rarely Used",
-        product_id="67896789",
-        city="Chicago",
-    )
-
-    return [
-        shoe1,
-    ]
-
-
 def convert_to_shoe(shoe_dicts):
     shoes = []
     for shoe in shoe_dicts:
         shoes.append(
             Shoe(
                 brand=shoe["brand"],
+                collection=shoe["collection"],
                 size=int(shoe["size"]),
                 shoe_type=shoe["type"],
                 price=float(shoe["price"]),
