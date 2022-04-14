@@ -190,6 +190,7 @@ def delete_shoe(request):
 
         try:
             db_access.Shoe.delete_one(shoe_to_delete)
+            db_access.Interest.delete_many({"shoe_id": str(shoe_to_delete["_id"])})
             return HttpResponse("Success")
         except:
             return HttpResponse("Unable to delete this listing!")

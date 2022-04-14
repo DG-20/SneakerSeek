@@ -235,6 +235,9 @@
               style="border: none; background-color: rgba(110, 110, 110, 0.829)"
             />
           </div>
+          {% for message in messages %}
+          <h3 class="text-center" style="color: red">{{message}}</h3>
+          {% endfor %}
         </form>
       </div>
     </div>

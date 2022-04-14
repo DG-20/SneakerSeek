@@ -248,6 +248,7 @@ def settings(request):
         currentPassword = request.POST["currentPassword"]
         newPassword = request.POST["newPassword"]
         confirmPassword = request.POST["confirmPassword"]
+        print(currentPassword, newPassword, confirmPassword)
 
         if firstName.strip() and firstName:
             request.user.first_name = firstName
@@ -260,33 +261,30 @@ def settings(request):
         if currentPassword.strip() and currentPassword:
             if newPassword.strip() and newPassword:
                 if confirmPassword.strip() and confirmPassword:
-                    if currentPassword == request.user.password:
-                        matched_users = auth.authentication(
-                            username=request.user.username, password=currentPassword
-                        )
-                        if matched_users is None:
-                            messages.info(
-                                request, "The current password entered was incorrect!"
-                            )
-                            return redirect("settings")
+                    if request.user.check_password(currentPassword) == True:
+                        if newPassword == confirmPassword:
+                            request.user.set_password(newPassword)
+                            request.user.save()
+                            return redirect("profile")
+
                         else:
-                            if newPassword == confirmPassword:
-                                request.user.set_password(newPassword)
-                                request.user.save()
-                                return redirect("profile")
-
-                            else:
-                                messages.info(
-                                    request,
-                                    "The new password was not confirmed correctly!",
-                                )
-                            return redirect("settings")
-        return redirect("profile")
-
-        # if firstname is empty dont update if it isnt empty then update it
-        # if old password is not empty then compare to current password if they match then
-        # if newpassword equals renewpassword then update password
-        # if old password is incorrect or two new passwords dont match then need to show a message similar to register
+                            messages.info(
+                                request,
+                                "The new password was not confirmed correctly!",
+                            )
+                        return redirect("settings")
+                    else:
+                        messages.info(
+                            request, "The current password entered was incorrect!"
+                        )
+                        return redirect("settings")
+                else:
+                    messages.info(request, "Please enter all three password fields!")
+                    return redirect("settings")
+            else:
+                messages.info(request, "Please enter all three password fields!")
+                return redirect("settings")
+    return redirect("profile")
 
 
 @login_required
@@ -346,6 +344,24 @@ def manage_users(request):
         user_to_delete = request.POST["username_del"]
         user_del = User.objects.get(username=user_to_delete)
         user_del.delete()
+        url = f"{sneakerseek_url}get_shoes_by_username/{user_to_delete}/"
+        json_return = requests.get(url).json()
+        shoe_ids_to_delete = []
+        for ret in json_return:
+            shoe_ids_to_delete.append(ret["_id"])
+        for id in shoe_ids_to_delete:
+            post_data = {"_id": id}
+
+            json_delete = json.dumps(post_data)
+
+            response = requests.post(
+                f"{sneakerseek_url}delete_shoe/",
+                data=json_delete,
+                headers={
+                    "Content-type": "application/json",
+                    "Accept": "application/json",
+                },
+            )
         return redirect(manage_users)
 
 
