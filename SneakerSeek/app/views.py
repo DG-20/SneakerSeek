@@ -1,4 +1,3 @@
-import collections
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, auth
@@ -130,15 +129,16 @@ def product(request, pk):
 
         for ret in json_return:
             username_val = ret["username"]
-            user_interested = User.objects.get(username=username_val)
-            buyers.append(
-                {
-                    "username": user_interested.username,
-                    "f_name": user_interested.first_name,
-                    "l_name": user_interested.last_name,
-                    "email": user_interested.email,
-                }
-            )
+            if User.objects.filter(username=username_val).exists():
+                user_interested = User.objects.get(username=username_val)
+                buyers.append(
+                    {
+                        "username": user_interested.username,
+                        "f_name": user_interested.first_name,
+                        "l_name": user_interested.last_name,
+                        "email": user_interested.email,
+                    }
+                )
 
         url = f"{sneakerseek_url}get_shoe_by_id/{pk}/"
         json_return = requests.get(url).json()
@@ -186,38 +186,21 @@ def sell_shoe(request):
         image_url = request.POST["image_url"]
         quadrant = request.POST["quadrant"]
 
-        if price != "more":
-            post_data = {
-                "brand": brand,
-                "collection": collection,
-                "size": size,
-                "type": type,
-                "title": name,
-                "price": price,
-                "gender": gender,
-                "year": year,
-                "condition": condition,
-                "city": city,
-                "quadrant": quadrant,
-                "seller": request.user.username,
-                "image": image_url,
-            }
-        else:
-            post_data = {
-                "brand": brand,
-                "collection": collection,
-                "size": size,
-                "type": type,
-                "title": name,
-                "price": float(price),
-                "gender": gender,
-                "year": year,
-                "condition": condition,
-                "city": city,
-                "quadrant": quadrant,
-                "seller": request.user.username,
-                "image": image_url,
-            }
+        post_data = {
+            "brand": brand,
+            "collection": collection,
+            "size": size,
+            "type": type,
+            "title": name,
+            "price": float(price),
+            "gender": gender,
+            "year": year,
+            "condition": condition,
+            "city": city,
+            "quadrant": quadrant,
+            "seller": request.user.username,
+            "image": image_url,
+        }
 
         json_product = json.dumps(post_data)
 
@@ -316,7 +299,6 @@ def my_shoes(request):
         return render(request, "my_shoes.html", {"products": shoes, "empty": empty})
     else:
         shoe_id_to_delete = request.POST["shoe_id"]
-        print(shoe_id_to_delete)
         post_data = {"_id": shoe_id_to_delete}
 
         json_delete = json.dumps(post_data)
@@ -324,10 +306,7 @@ def my_shoes(request):
         response = requests.delete(
             f"{sneakerseek_url}delete_shoe/",
             data=json_delete,
-            headers={
-                "Content-type": "application/json",
-                "Accept": "application/json",
-            },
+            headers={"Content-type": "application/json", "Accept": "application/json"},
         )
         return redirect("my_shoes")
 
@@ -413,10 +392,9 @@ def edit_shoe(request, pk):
     else:
         shoe_id_to_update = request.POST["shoe_id"]
         brand_updated = request.POST["brand"]
+        collection_updated = request.POST["collection"]
         size_updated = request.POST["size"]
         type_updated = request.POST["type"]
-        brand_updated = request.POST["brand"]
-        collection_updated = request.POST["collection"]
         name_updated = request.POST["title"]
         price_updated = request.POST["price"]
         gender_updated = request.POST["gender"]
@@ -432,9 +410,9 @@ def edit_shoe(request, pk):
             "size_updated": size_updated,
             "type_updated": type_updated,
             "title_updated": name_updated,
-            "price_updated": price_updated,
+            "price_updated": float(price_updated),
             "gender_updated": gender_updated,
-            "year_updated": year_updated,
+            "year_updated": int(year_updated),
             "condition_updated": condition_updated,
             "city_updated": city_updated,
             "quadrant_updated": quadrant_updated,
@@ -462,7 +440,7 @@ def convert_to_shoe(shoe_dicts):
                 shoe_type=shoe["type"],
                 price=float(shoe["price"]),
                 gender=shoe["gender"],
-                year_manufactured=shoe["year"],
+                year_manufactured=int(shoe["year"]),
                 condition=shoe["condition"],
                 quadrant=shoe["quadrant"],
                 seller=shoe["seller"],

@@ -1,5 +1,4 @@
 from re import search
-from turtle import update
 from pymongo import MongoClient
 from rest_framework.decorators import api_view
 from django.http import JsonResponse, HttpResponse
@@ -142,7 +141,7 @@ def interested_in(request):
     if request.method == "POST":
         db_access = connect_to_db()
         already_interested = db_access.Interest.find(
-            {"username": request.data["username"]}
+            {"username": request.data["username"], "shoe_id": request.data["shoe_id"]}
         )
         if already_interested.count() > 0:
             return HttpResponse("You already expressed your interest!")
