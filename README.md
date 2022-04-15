@@ -10,6 +10,16 @@ https://sneakerseek.herokuapp.com/
 
 ## Technologies Used
 
+* Django
+* PyMongo
+* MongoDB
+* Heroku
+* HTML & CSS
+* Python
+* Rest Framework
+
+## Specific Requirements
+
 * asgiref==3.4.1
 * brotlipy==0.7.0
 * certifi==2021.10.8
