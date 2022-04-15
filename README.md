@@ -8,35 +8,35 @@ SneakerSeek was designed to tackle the absence prevalent in local online shoe ma
 
 https://sneakerseek.herokuapp.com/
 
-## Technologies User
+## Technologies Used
 
-asgiref==3.4.1
-brotlipy==0.7.0
-certifi==2021.10.8
-cffi==1.15.0
-charset-normalizer==2.0.4
-colorama==0.4.4
-cryptography==36.0.0
-dj-database-url==0.5.0
-Django==3.2.5
-django-heroku==0.3.1
-djangorestframework==3.13.1
-dnspython==1.16.0
-gunicorn==20.1.0
-idna==3.3
-pip==21.2.4
-psycopg2==2.8.6
-pycparser==2.21
-pymongo==3.12.0
-pyOpenSSL==22.0.0
-PySocks==1.7.1
-pytz==2021.3
-requests==2.27.1
-setuptools==58.0.4
-sqlparse==0.4.1
-typing_extensions==4.1.1
-urllib3==1.26.8
-wheel==0.37.1
-whitenoise==6.0.0
-win-inet-pton==1.1.0
-wincertstore==0.2
+* asgiref==3.4.1
+* brotlipy==0.7.0
+* certifi==2021.10.8
+* cffi==1.15.0
+* charset-normalizer==2.0.4
+* colorama==0.4.4
+* cryptography==36.0.0
+* dj-database-url==0.5.0
+* Django==3.2.5
+* django-heroku==0.3.1
+* djangorestframework==3.13.1
+* dnspython==1.16.0
+* gunicorn==20.1.0
+* idna==3.3
+* pip==21.2.4
+* psycopg2==2.8.6
+* pycparser==2.21
+* pymongo==3.12.0
+* pyOpenSSL==22.0.0
+* PySocks==1.7.1
+* pytz==2021.3
+* requests==2.27.1
+* setuptools==58.0.4
+* sqlparse==0.4.1
+* typing_extensions==4.1.1
+* urllib3==1.26.8
+* wheel==0.37.1
+* whitenoise==6.0.0
+* win-inet-pton==1.1.0
+* wincertstore==0.2
